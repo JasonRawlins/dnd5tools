@@ -1,0 +1,27 @@
+Queue
+=======================================
+
+
+Sprint cleanup
+=======================================
+Generate database script
+
+Backlog
+=======================================
+Take over the world.
+Require a display name so emails aren't displayed publicly
+
+
+
+Completed
+=======================================
+Clean up solution
+Log in via site username and password 
+Character management (hard-coded)
+    Create character table with AspNetUserID and Name columns
+    Associate character to user
+    Create WebAPI controller (GET)
+    Angular route
+    Angular service
+    Angular controller
+    Angular display

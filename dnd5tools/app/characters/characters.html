@@ -1,0 +1,8 @@
+﻿<div ng-controller="CharactersController as vm">
+    Your characters:
+    <ul>
+        <li ng-repeat="character in vm.characters">
+            <span ng-bind="character.name"></span>
+        </li>
+    </ul>
+</div>
