@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="dnd5toolsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="dnd5toolsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -66,23 +66,164 @@
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
-        <EntityType Name="Characters">
+        <EntityType Name="Character">
           <Key>
             <PropertyRef Name="CharacterID" />
           </Key>
           <Property Name="CharacterID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="AspNetUserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RaceID" Type="int" Nullable="false" />
+          <Property Name="Class" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Str" Type="int" Nullable="false" />
+          <Property Name="Dex" Type="int" Nullable="false" />
+          <Property Name="Con" Type="int" Nullable="false" />
+          <Property Name="Int" Type="int" Nullable="false" />
+          <Property Name="Wis" Type="int" Nullable="false" />
+          <Property Name="Cha" Type="int" Nullable="false" />
+          <Property Name="ProficiencyBonus" Type="int" Nullable="false" />
+          <Property Name="StrengthSavingThrow" Type="int" Nullable="false" />
+          <Property Name="DexteritySavingThrow" Type="int" Nullable="false" />
+          <Property Name="ConstitutionSavingThrow" Type="int" Nullable="false" />
+          <Property Name="IntelligenceSavingThrow" Type="int" Nullable="false" />
+          <Property Name="WisdomSavingThrow" Type="int" Nullable="false" />
+          <Property Name="CharismaSavingThrow" Type="int" Nullable="false" />
+          <Property Name="Acrobatics" Type="int" Nullable="false" />
+          <Property Name="AnimalHandling" Type="int" Nullable="false" />
+          <Property Name="Arcana" Type="int" Nullable="false" />
+          <Property Name="Athletics" Type="int" Nullable="false" />
+          <Property Name="Deception" Type="int" Nullable="false" />
+          <Property Name="History" Type="int" Nullable="false" />
+          <Property Name="Insight" Type="int" Nullable="false" />
+          <Property Name="Intimidation" Type="int" Nullable="false" />
+          <Property Name="Investigation" Type="int" Nullable="false" />
+          <Property Name="Medicine" Type="int" Nullable="false" />
+          <Property Name="Nature" Type="int" Nullable="false" />
+          <Property Name="Perception" Type="int" Nullable="false" />
+          <Property Name="Performance" Type="int" Nullable="false" />
+          <Property Name="Persuasion" Type="int" Nullable="false" />
+          <Property Name="Religion" Type="int" Nullable="false" />
+          <Property Name="SleightOfHand" Type="int" Nullable="false" />
+          <Property Name="Stealth" Type="int" Nullable="false" />
+          <Property Name="Survival" Type="int" Nullable="false" />
+          <Property Name="ArmorClass" Type="int" Nullable="false" />
+          <Property Name="Initiative" Type="int" Nullable="false" />
+          <Property Name="Speed" Type="int" Nullable="false" />
+          <Property Name="HitPointMaximum" Type="int" Nullable="false" />
+          <Property Name="CurrentHitPoints" Type="int" Nullable="false" />
+          <Property Name="TemporaryHitpoints" Type="int" Nullable="false" />
+          <Property Name="HitDice" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PersonalityTraits" Type="nvarchar" MaxLength="4000" Nullable="false" />
+          <Property Name="Ideals" Type="nvarchar" MaxLength="4000" Nullable="false" />
+          <Property Name="Bonds" Type="nvarchar" MaxLength="4000" Nullable="false" />
+          <Property Name="Flaws" Type="nvarchar" MaxLength="4000" Nullable="false" />
+          <Property Name="Proficiencies" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="FeaturesAndTraits" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Age" Type="int" Nullable="false" />
+          <Property Name="Height" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Weight" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Eyes" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Skin" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Hair" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AlliesAndOrganizations" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="BackStory" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Treasure" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Copper" Type="int" Nullable="false" />
+          <Property Name="Silver" Type="int" Nullable="false" />
+          <Property Name="Electrum" Type="int" Nullable="false" />
+          <Property Name="Gold" Type="int" Nullable="false" />
+          <Property Name="Platinum" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK_Characters_AspNetUsers">
+        <EntityType Name="Class">
+          <Key>
+            <PropertyRef Name="ClassID" />
+          </Key>
+          <Property Name="ClassID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Race">
+          <Key>
+            <PropertyRef Name="RaceID" />
+          </Key>
+          <Property Name="RaceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Spell">
+          <Key>
+            <PropertyRef Name="SpellID" />
+          </Key>
+          <Property Name="SpellID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="School" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CastingTime" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Level" Type="int" Nullable="false" />
+          <Property Name="IsRitual" Type="bit" Nullable="false" />
+          <Property Name="IsConcentration" Type="bit" Nullable="false" />
+          <Property Name="Components" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="ComponentsFlavorText" Type="nvarchar" MaxLength="2000" Nullable="false" />
+          <Property Name="HasComponentCost" Type="bit" Nullable="false" />
+          <Property Name="Source" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Page" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SpellRating">
+          <Key>
+            <PropertyRef Name="SpellRatingID" />
+          </Key>
+          <Property Name="SpellRatingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="SpellID" Type="int" Nullable="false" />
+          <Property Name="ClassID" Type="int" />
+          <Property Name="Rating" Type="float" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'dnd5tools.dbo.SpellWithRating' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="SpellWithRating">
+          <Key>
+            <PropertyRef Name="SpellID" />
+            <PropertyRef Name="School" />
+            <PropertyRef Name="CastingTime" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Level" />
+            <PropertyRef Name="IsRitual" />
+            <PropertyRef Name="IsConcentration" />
+            <PropertyRef Name="Components" />
+            <PropertyRef Name="Source" />
+            <PropertyRef Name="Page" />
+          </Key>
+          <Property Name="SpellID" Type="int" Nullable="false" />
+          <Property Name="School" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CastingTime" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Level" Type="int" Nullable="false" />
+          <Property Name="IsRitual" Type="bit" Nullable="false" />
+          <Property Name="IsConcentration" Type="bit" Nullable="false" />
+          <Property Name="Components" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Source" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Page" Type="int" Nullable="false" />
+          <Property Name="Rating" Type="float" />
+        </EntityType>
+        <Association Name="FK_Character_AspNetUsers">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
-          <End Role="Characters" Type="Self.Characters" Multiplicity="*" />
+          <End Role="Character" Type="Self.Character" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetUsers">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Characters">
+            <Dependent Role="Character">
               <PropertyRef Name="AspNetUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Character_Race">
+          <End Role="Race" Type="Self.Race" Multiplicity="1" />
+          <End Role="Character" Type="Self.Character" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Race">
+              <PropertyRef Name="RaceID" />
+            </Principal>
+            <Dependent Role="Character">
+              <PropertyRef Name="RaceID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -142,6 +283,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_SpellRating_Class">
+          <End Role="Class" Type="Self.Class" Multiplicity="0..1" />
+          <End Role="SpellRating" Type="Self.SpellRating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Class">
+              <PropertyRef Name="ClassID" />
+            </Principal>
+            <Dependent Role="SpellRating">
+              <PropertyRef Name="ClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SpellRating_Spell">
+          <End Role="Spell" Type="Self.Spell" Multiplicity="1" />
+          <End Role="SpellRating" Type="Self.SpellRating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Spell">
+              <PropertyRef Name="SpellID" />
+            </Principal>
+            <Dependent Role="SpellRating">
+              <PropertyRef Name="SpellID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="dnd5toolsModelStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
@@ -149,10 +314,33 @@
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Characters" EntityType="Self.Characters" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Characters_AspNetUsers" Association="Self.FK_Characters_AspNetUsers">
+          <EntitySet Name="Character" EntityType="Self.Character" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Class" EntityType="Self.Class" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Race" EntityType="Self.Race" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Spell" EntityType="Self.Spell" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SpellRating" EntityType="Self.SpellRating" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SpellWithRating" EntityType="Self.SpellWithRating" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [SpellWithRating].[SpellID] AS [SpellID], 
+    [SpellWithRating].[School] AS [School], 
+    [SpellWithRating].[CastingTime] AS [CastingTime], 
+    [SpellWithRating].[Name] AS [Name], 
+    [SpellWithRating].[Level] AS [Level], 
+    [SpellWithRating].[IsRitual] AS [IsRitual], 
+    [SpellWithRating].[IsConcentration] AS [IsConcentration], 
+    [SpellWithRating].[Components] AS [Components], 
+    [SpellWithRating].[Source] AS [Source], 
+    [SpellWithRating].[Page] AS [Page], 
+    [SpellWithRating].[Rating] AS [Rating]
+    FROM [dbo].[SpellWithRating] AS [SpellWithRating]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Character_AspNetUsers" Association="Self.FK_Character_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="Characters" EntitySet="Characters" />
+            <End Role="Character" EntitySet="Character" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Character_Race" Association="Self.FK_Character_Race">
+            <End Role="Race" EntitySet="Race" />
+            <End Role="Character" EntitySet="Character" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -170,9 +358,16 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
+          <AssociationSet Name="FK_SpellRating_Class" Association="Self.FK_SpellRating_Class">
+            <End Role="Class" EntitySet="Class" />
+            <End Role="SpellRating" EntitySet="SpellRating" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SpellRating_Spell" Association="Self.FK_SpellRating_Spell">
+            <End Role="Spell" EntitySet="Spell" />
+            <End Role="SpellRating" EntitySet="SpellRating" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="dnd5toolsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -233,17 +428,8 @@
           <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
-          <NavigationProperty Name="Characters" Relationship="Self.FK_Characters_AspNetUsers" FromRole="AspNetUsers" ToRole="Characters" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
-        </EntityType>
-        <EntityType Name="Character">
-          <Key>
-            <PropertyRef Name="CharacterID" />
-          </Key>
-          <Property Name="CharacterID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="AspNetUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Characters_AspNetUsers" FromRole="Characters" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Characters" Relationship="dnd5toolsModel.FK_Character_AspNetUsers" FromRole="AspNetUser" ToRole="Character" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
@@ -273,18 +459,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Characters_AspNetUsers">
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
-          <End Role="Characters" Type="Self.Character" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Characters">
-              <PropertyRef Name="AspNetUserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="AspNetUserRoles">
           <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
@@ -295,7 +469,6 @@
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
-          <EntitySet Name="Characters" EntityType="Self.Character" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -304,16 +477,224 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
           </AssociationSet>
-          <AssociationSet Name="FK_Characters_AspNetUsers" Association="Self.FK_Characters_AspNetUsers">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="Characters" EntitySet="Characters" />
-          </AssociationSet>
           <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
-        </EntityContainer>
-      </Schema>
+          <EntitySet Name="Races" EntityType="dnd5toolsModel.Race" />
+          <EntitySet Name="Characters" EntityType="dnd5toolsModel.Character" />
+          <AssociationSet Name="FK_Character_AspNetUsers" Association="dnd5toolsModel.FK_Character_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="Character" EntitySet="Characters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Character_Race" Association="dnd5toolsModel.FK_Character_Race">
+            <End Role="Race" EntitySet="Races" />
+            <End Role="Character" EntitySet="Characters" />
+          </AssociationSet>
+          <EntitySet Name="Spells" EntityType="dnd5toolsModel.Spell" />
+          <EntitySet Name="Classes" EntityType="dnd5toolsModel.Class" />
+          <EntitySet Name="SpellRatings" EntityType="dnd5toolsModel.SpellRating" />
+          <AssociationSet Name="FK_SpellRating_Class" Association="dnd5toolsModel.FK_SpellRating_Class">
+            <End Role="Class" EntitySet="Classes" />
+            <End Role="SpellRating" EntitySet="SpellRatings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SpellRating_Spell" Association="dnd5toolsModel.FK_SpellRating_Spell">
+            <End Role="Spell" EntitySet="Spells" />
+            <End Role="SpellRating" EntitySet="SpellRatings" />
+          </AssociationSet>
+          <EntitySet Name="SpellWithRatings" EntityType="dnd5toolsModel.SpellWithRating" />
+          </EntityContainer>
+        <EntityType Name="Race">
+          <Key>
+            <PropertyRef Name="RaceID" />
+          </Key>
+          <Property Name="RaceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Characters" Relationship="dnd5toolsModel.FK_Character_Race" FromRole="Race" ToRole="Character" />
+        </EntityType>
+        <EntityType Name="Character">
+          <Key>
+            <PropertyRef Name="CharacterID" />
+          </Key>
+          <Property Name="CharacterID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AspNetUserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="RaceID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Str" Type="Int32" Nullable="false" />
+          <Property Name="Dex" Type="Int32" Nullable="false" />
+          <Property Name="Con" Type="Int32" Nullable="false" />
+          <Property Name="Int" Type="Int32" Nullable="false" />
+          <Property Name="Wis" Type="Int32" Nullable="false" />
+          <Property Name="Cha" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="dnd5toolsModel.FK_Character_AspNetUsers" FromRole="Character" ToRole="AspNetUser" />
+          <NavigationProperty Name="Race" Relationship="dnd5toolsModel.FK_Character_Race" FromRole="Character" ToRole="Race" />
+          <Property Name="ProficiencyBonus" Type="Int32" Nullable="false" />
+          <Property Name="StrengthSavingThrow" Type="Int32" Nullable="false" />
+          <Property Name="DexteritySavingThrow" Type="Int32" Nullable="false" />
+          <Property Name="ConstitutionSavingThrow" Type="Int32" Nullable="false" />
+          <Property Name="IntelligenceSavingThrow" Type="Int32" Nullable="false" />
+          <Property Name="WisdomSavingThrow" Type="Int32" Nullable="false" />
+          <Property Name="CharismaSavingThrow" Type="Int32" Nullable="false" />
+          <Property Name="Acrobatics" Type="Int32" Nullable="false" />
+          <Property Name="AnimalHandling" Type="Int32" Nullable="false" />
+          <Property Name="Arcana" Type="Int32" Nullable="false" />
+          <Property Name="Athletics" Type="Int32" Nullable="false" />
+          <Property Name="Deception" Type="Int32" Nullable="false" />
+          <Property Name="History" Type="Int32" Nullable="false" />
+          <Property Name="Insight" Type="Int32" Nullable="false" />
+          <Property Name="Intimidation" Type="Int32" Nullable="false" />
+          <Property Name="Investigation" Type="Int32" Nullable="false" />
+          <Property Name="Medicine" Type="Int32" Nullable="false" />
+          <Property Name="Nature" Type="Int32" Nullable="false" />
+          <Property Name="Perception" Type="Int32" Nullable="false" />
+          <Property Name="Performance" Type="Int32" Nullable="false" />
+          <Property Name="Persuasion" Type="Int32" Nullable="false" />
+          <Property Name="Religion" Type="Int32" Nullable="false" />
+          <Property Name="SleightOfHand" Type="Int32" Nullable="false" />
+          <Property Name="Stealth" Type="Int32" Nullable="false" />
+          <Property Name="Survival" Type="Int32" Nullable="false" />
+          <Property Name="ArmorClass" Type="Int32" Nullable="false" />
+          <Property Name="Initiative" Type="Int32" Nullable="false" />
+          <Property Name="Speed" Type="Int32" Nullable="false" />
+          <Property Name="HitPointMaximum" Type="Int32" Nullable="false" />
+          <Property Name="CurrentHitPoints" Type="Int32" Nullable="false" />
+          <Property Name="TemporaryHitpoints" Type="Int32" Nullable="false" />
+          <Property Name="HitDice" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PersonalityTraits" Type="String" Nullable="false" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="Ideals" Type="String" Nullable="false" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="Bonds" Type="String" Nullable="false" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="Flaws" Type="String" Nullable="false" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="Proficiencies" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FeaturesAndTraits" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Age" Type="Int32" Nullable="false" />
+          <Property Name="Height" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Weight" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Eyes" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Skin" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Hair" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AlliesAndOrganizations" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BackStory" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Treasure" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Copper" Type="Int32" Nullable="false" />
+          <Property Name="Silver" Type="Int32" Nullable="false" />
+          <Property Name="Electrum" Type="Int32" Nullable="false" />
+          <Property Name="Gold" Type="Int32" Nullable="false" />
+          <Property Name="Platinum" Type="Int32" Nullable="false" />
+          <Property Name="Class" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_Character_AspNetUsers">
+          <End Type="dnd5toolsModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="dnd5toolsModel.Character" Role="Character" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Character">
+              <PropertyRef Name="AspNetUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Character_Race">
+          <End Type="dnd5toolsModel.Race" Role="Race" Multiplicity="1" />
+          <End Type="dnd5toolsModel.Character" Role="Character" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Race">
+              <PropertyRef Name="RaceID" />
+            </Principal>
+            <Dependent Role="Character">
+              <PropertyRef Name="RaceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Spell">
+          <Key>
+            <PropertyRef Name="SpellID" />
+          </Key>
+          <Property Name="SpellID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="School" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CastingTime" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Level" Type="Int32" Nullable="false" />
+          <Property Name="IsRitual" Type="Boolean" Nullable="false" />
+          <Property Name="IsConcentration" Type="Boolean" Nullable="false" />
+          <Property Name="Components" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ComponentsFlavorText" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="HasComponentCost" Type="Boolean" Nullable="false" />
+          <Property Name="Source" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Page" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SpellRatings" Relationship="dnd5toolsModel.FK_SpellRating_Spell" FromRole="Spell" ToRole="SpellRating" />
+        </EntityType>
+        <EntityType Name="Class">
+          <Key>
+            <PropertyRef Name="ClassID" />
+          </Key>
+          <Property Name="ClassID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SpellRatings" Relationship="dnd5toolsModel.FK_SpellRating_Class" FromRole="Class" ToRole="SpellRating" />
+        </EntityType>
+        <EntityType Name="SpellRating">
+          <Key>
+            <PropertyRef Name="SpellRatingID" />
+          </Key>
+          <Property Name="SpellRatingID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="SpellID" Type="Int32" Nullable="false" />
+          <Property Name="ClassID" Type="Int32" />
+          <Property Name="Rating" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Class" Relationship="dnd5toolsModel.FK_SpellRating_Class" FromRole="SpellRating" ToRole="Class" />
+          <NavigationProperty Name="Spell" Relationship="dnd5toolsModel.FK_SpellRating_Spell" FromRole="SpellRating" ToRole="Spell" />
+        </EntityType>
+        <Association Name="FK_SpellRating_Class">
+          <End Type="dnd5toolsModel.Class" Role="Class" Multiplicity="0..1" />
+          <End Type="dnd5toolsModel.SpellRating" Role="SpellRating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Class">
+              <PropertyRef Name="ClassID" />
+            </Principal>
+            <Dependent Role="SpellRating">
+              <PropertyRef Name="ClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SpellRating_Spell">
+          <End Type="dnd5toolsModel.Spell" Role="Spell" Multiplicity="1" />
+          <End Type="dnd5toolsModel.SpellRating" Role="SpellRating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Spell">
+              <PropertyRef Name="SpellID" />
+            </Principal>
+            <Dependent Role="SpellRating">
+              <PropertyRef Name="SpellID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="SpellWithRating">
+          <Key>
+            <PropertyRef Name="SpellID" />
+            <PropertyRef Name="School" />
+            <PropertyRef Name="CastingTime" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Level" />
+            <PropertyRef Name="IsRitual" />
+            <PropertyRef Name="IsConcentration" />
+            <PropertyRef Name="Components" />
+            <PropertyRef Name="Source" />
+            <PropertyRef Name="Page" />
+          </Key>
+          <Property Name="SpellID" Type="Int32" Nullable="false" />
+          <Property Name="School" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CastingTime" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Level" Type="Int32" Nullable="false" />
+          <Property Name="IsRitual" Type="Boolean" Nullable="false" />
+          <Property Name="IsConcentration" Type="Boolean" Nullable="false" />
+          <Property Name="Components" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Source" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Page" Type="Int32" Nullable="false" />
+          <Property Name="Rating" Type="Double" />
+        </EntityType>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -374,15 +755,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Characters">
-            <EntityTypeMapping TypeName="dnd5toolsModel.Character">
-              <MappingFragment StoreEntitySet="Characters">
-                <ScalarProperty Name="CharacterID" ColumnName="CharacterID" />
-                <ScalarProperty Name="AspNetUserID" ColumnName="AspNetUserID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <AssociationSetMapping Name="AspNetUserRoles" TypeName="dnd5toolsModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
             <EndProperty Name="AspNetRoles">
               <ScalarProperty Name="Id" ColumnName="RoleId" />
@@ -391,6 +763,138 @@
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="Races">
+            <EntityTypeMapping TypeName="dnd5toolsModel.Race">
+              <MappingFragment StoreEntitySet="Race">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="RaceID" ColumnName="RaceID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Characters">
+            <EntityTypeMapping TypeName="dnd5toolsModel.Character">
+              <MappingFragment StoreEntitySet="Character">
+                <ScalarProperty Name="Class" ColumnName="Class" />
+                <ScalarProperty Name="Platinum" ColumnName="Platinum" />
+                <ScalarProperty Name="Gold" ColumnName="Gold" />
+                <ScalarProperty Name="Electrum" ColumnName="Electrum" />
+                <ScalarProperty Name="Silver" ColumnName="Silver" />
+                <ScalarProperty Name="Copper" ColumnName="Copper" />
+                <ScalarProperty Name="Treasure" ColumnName="Treasure" />
+                <ScalarProperty Name="BackStory" ColumnName="BackStory" />
+                <ScalarProperty Name="AlliesAndOrganizations" ColumnName="AlliesAndOrganizations" />
+                <ScalarProperty Name="Hair" ColumnName="Hair" />
+                <ScalarProperty Name="Skin" ColumnName="Skin" />
+                <ScalarProperty Name="Eyes" ColumnName="Eyes" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="FeaturesAndTraits" ColumnName="FeaturesAndTraits" />
+                <ScalarProperty Name="Proficiencies" ColumnName="Proficiencies" />
+                <ScalarProperty Name="Flaws" ColumnName="Flaws" />
+                <ScalarProperty Name="Bonds" ColumnName="Bonds" />
+                <ScalarProperty Name="Ideals" ColumnName="Ideals" />
+                <ScalarProperty Name="PersonalityTraits" ColumnName="PersonalityTraits" />
+                <ScalarProperty Name="HitDice" ColumnName="HitDice" />
+                <ScalarProperty Name="TemporaryHitpoints" ColumnName="TemporaryHitpoints" />
+                <ScalarProperty Name="CurrentHitPoints" ColumnName="CurrentHitPoints" />
+                <ScalarProperty Name="HitPointMaximum" ColumnName="HitPointMaximum" />
+                <ScalarProperty Name="Speed" ColumnName="Speed" />
+                <ScalarProperty Name="Initiative" ColumnName="Initiative" />
+                <ScalarProperty Name="ArmorClass" ColumnName="ArmorClass" />
+                <ScalarProperty Name="Survival" ColumnName="Survival" />
+                <ScalarProperty Name="Stealth" ColumnName="Stealth" />
+                <ScalarProperty Name="SleightOfHand" ColumnName="SleightOfHand" />
+                <ScalarProperty Name="Religion" ColumnName="Religion" />
+                <ScalarProperty Name="Persuasion" ColumnName="Persuasion" />
+                <ScalarProperty Name="Performance" ColumnName="Performance" />
+                <ScalarProperty Name="Perception" ColumnName="Perception" />
+                <ScalarProperty Name="Nature" ColumnName="Nature" />
+                <ScalarProperty Name="Medicine" ColumnName="Medicine" />
+                <ScalarProperty Name="Investigation" ColumnName="Investigation" />
+                <ScalarProperty Name="Intimidation" ColumnName="Intimidation" />
+                <ScalarProperty Name="Insight" ColumnName="Insight" />
+                <ScalarProperty Name="History" ColumnName="History" />
+                <ScalarProperty Name="Deception" ColumnName="Deception" />
+                <ScalarProperty Name="Athletics" ColumnName="Athletics" />
+                <ScalarProperty Name="Arcana" ColumnName="Arcana" />
+                <ScalarProperty Name="AnimalHandling" ColumnName="AnimalHandling" />
+                <ScalarProperty Name="Acrobatics" ColumnName="Acrobatics" />
+                <ScalarProperty Name="CharismaSavingThrow" ColumnName="CharismaSavingThrow" />
+                <ScalarProperty Name="WisdomSavingThrow" ColumnName="WisdomSavingThrow" />
+                <ScalarProperty Name="IntelligenceSavingThrow" ColumnName="IntelligenceSavingThrow" />
+                <ScalarProperty Name="ConstitutionSavingThrow" ColumnName="ConstitutionSavingThrow" />
+                <ScalarProperty Name="DexteritySavingThrow" ColumnName="DexteritySavingThrow" />
+                <ScalarProperty Name="StrengthSavingThrow" ColumnName="StrengthSavingThrow" />
+                <ScalarProperty Name="ProficiencyBonus" ColumnName="ProficiencyBonus" />
+                <ScalarProperty Name="Cha" ColumnName="Cha" />
+                <ScalarProperty Name="Wis" ColumnName="Wis" />
+                <ScalarProperty Name="Int" ColumnName="Int" />
+                <ScalarProperty Name="Con" ColumnName="Con" />
+                <ScalarProperty Name="Dex" ColumnName="Dex" />
+                <ScalarProperty Name="Str" ColumnName="Str" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="RaceID" ColumnName="RaceID" />
+                <ScalarProperty Name="AspNetUserID" ColumnName="AspNetUserID" />
+                <ScalarProperty Name="CharacterID" ColumnName="CharacterID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Spells">
+            <EntityTypeMapping TypeName="dnd5toolsModel.Spell">
+              <MappingFragment StoreEntitySet="Spell">
+                <ScalarProperty Name="Page" ColumnName="Page" />
+                <ScalarProperty Name="Source" ColumnName="Source" />
+                <ScalarProperty Name="HasComponentCost" ColumnName="HasComponentCost" />
+                <ScalarProperty Name="ComponentsFlavorText" ColumnName="ComponentsFlavorText" />
+                <ScalarProperty Name="Components" ColumnName="Components" />
+                <ScalarProperty Name="IsConcentration" ColumnName="IsConcentration" />
+                <ScalarProperty Name="IsRitual" ColumnName="IsRitual" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CastingTime" ColumnName="CastingTime" />
+                <ScalarProperty Name="School" ColumnName="School" />
+                <ScalarProperty Name="SpellID" ColumnName="SpellID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Classes">
+            <EntityTypeMapping TypeName="dnd5toolsModel.Class">
+              <MappingFragment StoreEntitySet="Class">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SpellRatings">
+            <EntityTypeMapping TypeName="dnd5toolsModel.SpellRating">
+              <MappingFragment StoreEntitySet="SpellRating">
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+                <ScalarProperty Name="SpellID" ColumnName="SpellID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="SpellRatingID" ColumnName="SpellRatingID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SpellWithRatings">
+            <EntityTypeMapping TypeName="dnd5toolsModel.SpellWithRating">
+              <MappingFragment StoreEntitySet="SpellWithRating">
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="Page" ColumnName="Page" />
+                <ScalarProperty Name="Source" ColumnName="Source" />
+                <ScalarProperty Name="Components" ColumnName="Components" />
+                <ScalarProperty Name="IsConcentration" ColumnName="IsConcentration" />
+                <ScalarProperty Name="IsRitual" ColumnName="IsRitual" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CastingTime" ColumnName="CastingTime" />
+                <ScalarProperty Name="School" ColumnName="School" />
+                <ScalarProperty Name="SpellID" ColumnName="SpellID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

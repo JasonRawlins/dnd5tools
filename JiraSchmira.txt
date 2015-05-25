@@ -1,5 +1,9 @@
 Queue
 =======================================
+Display spell rating on individual spell pages
+Make spell rating stars
+Comment on spell
+
 
 
 Sprint cleanup
@@ -8,20 +12,35 @@ Generate database script
 
 Backlog
 =======================================
+Each page should remember what sub tab it's on when the page is refreshed.
 Take over the world.
 Require a display name so emails aren't displayed publicly
+Character list links to character-details.
+    CharacterID is passed to the next view. 
+Store logged in user's id for use in the rest of the app.
+What is the appropriate response for a PUT for both success and failure? (updateCharacterComplete)
+Use flexbox instead of floats for layout
+Add and populate race table.
+Add Race column to Character table.
+Return race with character data.
+Display race on characters and character views.
 
-
-
-Completed
+Release 1
 =======================================
-Clean up solution
-Log in via site username and password 
-Character management (hard-coded)
-    Create character table with AspNetUserID and Name columns
-    Associate character to user
-    Create WebAPI controller (GET)
-    Angular route
-    Angular service
-    Angular controller
-    Angular display
+= Included: 
+=   Spell ratings, comments, and shenanigans
+=======================================
+
+What is this site anyway? 
+-------------------------
+A place for DMs and players to find tools so they can run and play the game more easily.
+
+Major sections:
+Spells with ratings and shenanigans
+Skills with ratings and shenanigans
+Class guides with ratings and shenanigans
+
+Many of these are tools to help users and DMs make informed decisions
+
+Later it could be a character sheet repository
+Much later it could be a virtual asynchronous "table"

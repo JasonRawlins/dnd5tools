@@ -18,8 +18,8 @@ namespace dnd5tools.Models
         {
             this.AspNetUserClaims = new HashSet<AspNetUserClaim>();
             this.AspNetUserLogins = new HashSet<AspNetUserLogin>();
-            this.Characters = new HashSet<Character>();
             this.AspNetRoles = new HashSet<AspNetRole>();
+            this.Characters = new HashSet<Character>();
         }
     
         public string Id { get; set; }
@@ -37,7 +37,7 @@ namespace dnd5tools.Models
     
         public virtual ICollection<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual ICollection<AspNetUserLogin> AspNetUserLogins { get; set; }
-        public virtual ICollection<Character> Characters { get; set; }
         public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
+        public virtual ICollection<Character> Characters { get; set; }
     }
 }

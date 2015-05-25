@@ -34,7 +34,7 @@ namespace dnd5tools.Controllers {
         [Route("api/AspNetUsers/{aspNetUserID}/characters")]
         [ResponseType(typeof(ICollection<Character>))]
         public IHttpActionResult GetCharacters(string aspNetUserID) {
-            var aspNetUser = db.AspNetUsers.Include(u => u.Characters).SingleOrDefault(u => u.Id == aspNetUserID);
+            var aspNetUser = db.AspNetUsers.Include(u => u.Characters.Select(c => c.Race)).SingleOrDefault(u => u.Id == aspNetUserID);
 
             if (aspNetUser == null) {
                 return NotFound();

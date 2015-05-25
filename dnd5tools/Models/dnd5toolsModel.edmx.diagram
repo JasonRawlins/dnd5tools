@@ -10,12 +10,20 @@
         <EntityTypeShape EntityType="dnd5toolsModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="dnd5toolsModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
         <EntityTypeShape EntityType="dnd5toolsModel.AspNetUser" Width="1.5" PointX="3" PointY="2.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="dnd5toolsModel.Character" Width="1.5" PointX="5.25" PointY="6.5" IsExpanded="true" />
         <AssociationConnector Association="dnd5toolsModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="dnd5toolsModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
-        <AssociationConnector Association="dnd5toolsModel.FK_Characters_AspNetUsers" ManuallyRouted="false" />
         <AssociationConnector Association="dnd5toolsModel.AspNetUserRoles" ManuallyRouted="false" />
-      </Diagram>
+        <EntityTypeShape EntityType="dnd5toolsModel.Race" Width="1.5" PointX="5.25" PointY="6.25" />
+        <EntityTypeShape EntityType="dnd5toolsModel.Character" Width="1.5" PointX="9.875" PointY="0.75" />
+        <AssociationConnector Association="dnd5toolsModel.FK_Character_AspNetUsers" />
+        <AssociationConnector Association="dnd5toolsModel.FK_Character_Race" />
+        <EntityTypeShape EntityType="dnd5toolsModel.Spell" Width="1.5" PointX="0.75" PointY="7.75" />
+        <EntityTypeShape EntityType="dnd5toolsModel.Class" Width="1.5" PointX="3.25" PointY="11.875" />
+        <EntityTypeShape EntityType="dnd5toolsModel.SpellRating" Width="1.5" PointX="3.25" PointY="8.375" />
+        <AssociationConnector Association="dnd5toolsModel.FK_SpellRating_Class" />
+        <AssociationConnector Association="dnd5toolsModel.FK_SpellRating_Spell" />
+        <EntityTypeShape EntityType="dnd5toolsModel.SpellWithRating" Width="1.5" PointX="5.375" PointY="8.75" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

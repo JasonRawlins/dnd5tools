@@ -6,6 +6,7 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Project", "Project", "{B9634D24-CACC-42E0-B262-7E6D055D4252}"
 	ProjectSection(SolutionItems) = preProject
 		JiraSchmira.txt = JiraSchmira.txt
+		Personas.txt = Personas.txt
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dnd5tools", "dnd5tools\dnd5tools.csproj", "{4EF2692D-0462-4F0E-9855-EA2A88C9EA7A}"

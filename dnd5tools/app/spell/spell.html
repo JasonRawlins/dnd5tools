@@ -1,0 +1,13 @@
+﻿<div ng-controller="SpellController as vm">
+    <h3 ng-bind="vm.spell.name"></h3>
+    <i ng-bind="vm.spell.levelDescription"></i> <i ng-if="vm.spell.isRitual">(ritual)</i> <i ng-if="vm.spell.isConcentration">(concentration)</i>
+    <div>
+        <strong>Casting Time:</strong> <span ng-bind="vm.spell.castingTime"></span>
+    </div>
+    <div>
+        <strong>Components:</strong> <span ng-bind="vm.spell.components"></span> <i ng-if="vm.spell.hasComponentCost">(cost)</i>
+    </div>
+    <div>
+        <strong>Source:</strong> <span ng-bind="vm.spell.source + ' pg. ' + vm.spell.page"></span>
+    </div>
+</div>

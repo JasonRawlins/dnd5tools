@@ -8,8 +8,8 @@
     function CharactersController(charactersDataService) {
         var vm = this;
 
-        charactersDataService.getCharacters("a6c3096d-14ac-4b72-82c8-005f7d7f27bf").then(function (value) {
-            vm.characters = value;
+        charactersDataService.getCharacters("a6c3096d-14ac-4b72-82c8-005f7d7f27bf").then(function (characters) {
+            vm.characters = characters;
         });
     }
 

@@ -20,9 +20,8 @@
             }
 
             function getCharactersFailed(error) {
-                log.error("XHR Failed for getCharacters." + error.data);
+                log.error("XHR failed for getCharacters. " + error.data);
             }
         }
     }
-
 })();

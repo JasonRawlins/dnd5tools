@@ -18,14 +18,24 @@ namespace dnd5tools {
 
             bundles.Add(new ScriptBundle("~/bundles/app").Include(
                 "~/app/app.js",
+                "~/app/app.controller.js",
                 "~/app/app.routes.js",
-                "~/app/services/log.service.js",
+                "~/app/common/directives/logOff.directive.js",
+                "~/app/common/services/log.service.js",
+                "~/app/common/services/spell.service.js",
+                "~/app/character/character.controller.js",
+                "~/app/character/character.data.service.js",
+                "~/app/characters/characters.controller.js",
                 "~/app/characters/characters.data.service.js",
-                "~/app/characters/characters.controller.js"
+                "~/app/spell/spell.controller.js",
+                "~/app/spell/spell.data.service.js",
+                "~/app/spells/spells.controller.js",
+                "~/app/spells/spells.data.service.js"
             ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                 "~/Content/Site.css"));
+                "~/Content/normalize.css",
+                "~/Content/site.css"));
         }
     }
 }
