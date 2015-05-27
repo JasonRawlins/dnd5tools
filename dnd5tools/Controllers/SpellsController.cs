@@ -37,6 +37,19 @@ namespace dnd5tools.Controllers {
             return db.SpellWithRatings;
         }
 
+        // GET: api/SpellsWithRating/5
+        [Route("api/spellsWithRatings/{id:int}")]
+        [ResponseType(typeof(SpellWithRating))]
+        public IHttpActionResult GetSpellWithRating(int id) {
+            SpellWithRating spellWithRating = db.SpellWithRatings.SingleOrDefault(s => s.SpellID == id);
+
+            if (spellWithRating == null) {
+                return NotFound();
+            }
+
+            return Ok(spellWithRating);
+        }
+
         //// PUT: api/Spells/5
         //[ResponseType(typeof(void))]
         //public IHttpActionResult PutSpell(int id, Spell spell)

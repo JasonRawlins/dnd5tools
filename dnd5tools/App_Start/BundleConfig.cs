@@ -21,6 +21,7 @@ namespace dnd5tools {
                 "~/app/app.controller.js",
                 "~/app/app.routes.js",
                 "~/app/common/directives/logOff.directive.js",
+                "~/app/common/directives/rating.directive.js",
                 "~/app/common/services/log.service.js",
                 "~/app/common/services/spell.service.js",
                 "~/app/character/character.controller.js",

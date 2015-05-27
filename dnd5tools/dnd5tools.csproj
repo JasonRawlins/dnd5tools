@@ -293,6 +293,8 @@
     <Content Include="app\character\character.data.service.js" />
     <Content Include="app\character\character.html" />
     <Content Include="app\common\directives\logOff.directive.js" />
+    <Content Include="app\common\directives\rating.directive.js" />
+    <Content Include="app\common\directives\rating.html" />
     <Content Include="app\spells\spells.controller.js" />
     <Content Include="app\spells\spells.html" />
     <Content Include="app\spell\spell.controller.js" />
@@ -1157,6 +1159,7 @@
     <Folder Include="app\common\controllers\" />
     <Folder Include="app\components\" />
     <Folder Include="App_Data\" />
+    <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
