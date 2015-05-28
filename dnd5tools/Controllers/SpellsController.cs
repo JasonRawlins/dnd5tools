@@ -14,12 +14,12 @@ namespace dnd5tools.Controllers {
     public class SpellsController : ApiController {
         private dnd5toolsDbContext db = new dnd5toolsDbContext();
 
-        // GET: api/Spells
+        // GET: api/v1/Spells
         public IQueryable<Spell> GetSpells() {
             return db.Spells;
         }
 
-        // GET: api/Spells/5
+        // GET: api/v1/Spells/5
         [ResponseType(typeof(Spell))]
         public IHttpActionResult GetSpell(int id) {
             Spell spell = db.Spells.Find(id);
@@ -31,14 +31,14 @@ namespace dnd5tools.Controllers {
             return Ok(spell);
         }
 
-        // GET: api/SpellsWithRating
-        [Route("api/spellsWithRatings")]
+        // GET: api/v1/SpellsWithRating
+        [Route("api/v1/spellsWithRatings")]
         public IQueryable<SpellWithRating> GetSpellsWithRatings() {
             return db.SpellWithRatings;
         }
 
-        // GET: api/SpellsWithRating/5
-        [Route("api/spellsWithRatings/{id:int}")]
+        // GET: api/v1/SpellsWithRating/5
+        [Route("api/v1/spellsWithRatings/{id:int}")]
         [ResponseType(typeof(SpellWithRating))]
         public IHttpActionResult GetSpellWithRating(int id) {
             SpellWithRating spellWithRating = db.SpellWithRatings.SingleOrDefault(s => s.SpellID == id);

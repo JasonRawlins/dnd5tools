@@ -12,7 +12,7 @@
         };
 
         function getSpell(spellID) {
-            return $http.get("api/spells/" + spellID)
+            return $http.get("api/v1/spells/" + spellID)
                 .then(getSpellComplete)
                 .catch(getSpellFailure);
 
@@ -28,7 +28,7 @@
         }
 
         function getSpellWithRating(spellID) {
-            return $http.get("api/spellsWithRatings/" + spellID)
+            return $http.get("api/v1/spellsWithRatings/" + spellID)
                 .then(getSpellWithRatingComplete)
                 .catch(getSpellWithRatingFailure);
 

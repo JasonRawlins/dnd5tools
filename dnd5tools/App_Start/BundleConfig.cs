@@ -21,13 +21,15 @@ namespace dnd5tools {
                 "~/app/app.controller.js",
                 "~/app/app.routes.js",
                 "~/app/common/directives/logOff.directive.js",
-                "~/app/common/directives/rating.directive.js",
                 "~/app/common/services/log.service.js",
                 "~/app/common/services/spell.service.js",
                 "~/app/character/character.controller.js",
                 "~/app/character/character.data.service.js",
                 "~/app/characters/characters.controller.js",
                 "~/app/characters/characters.data.service.js",
+                "~/app/rating/rating.data.service.js",
+                "~/app/rating/rating-display.directive.js",
+                "~/app/rating/rating-edit.directive.js",
                 "~/app/spell/spell.controller.js",
                 "~/app/spell/spell.data.service.js",
                 "~/app/spells/spells.controller.js",
@@ -36,7 +38,9 @@ namespace dnd5tools {
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/normalize.css",
-                "~/Content/site.css"));
+                "~/Content/site.css",
+                "~/Content/sprites.css"
+            ));
         }
     }
 }

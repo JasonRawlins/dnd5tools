@@ -1,5 +1,8 @@
 ﻿<div ng-controller="SpellController as vm">
-    <h3 ng-bind="vm.spell.name"></h3>
+    <h3>
+        <span ng-bind="vm.spell.name"></span>
+        <rating-display value="{{vm.spell.rating}}"></rating-display>
+    </h3>
     <i ng-bind="vm.spell.levelDescription"></i> <i ng-if="vm.spell.isRitual">(ritual)</i> <i ng-if="vm.spell.isConcentration">(concentration)</i>
     <div>
         <strong>Casting Time:</strong> <span ng-bind="vm.spell.castingTime"></span>
@@ -10,7 +13,5 @@
     <div>
         <strong>Source:</strong> <span ng-bind="vm.spell.source + ' pg. ' + vm.spell.page"></span>
     </div>
-    <div>
-        <rating value="{{vm.spell.rating}}"></rating>
-    </div>
+    <rating-edit type="spell" entity-id="{{vm.spell.spellID}}"></rating-edit>
 </div>

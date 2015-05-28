@@ -11,7 +11,7 @@
         };
 
         function getCharacters(aspNetUserID) {
-            return $http.get("api/AspNetUsers/" + aspNetUserID + "/Characters")
+            return $http.get("api/v1/AspNetUsers/" + aspNetUserID + "/Characters")
                 .then(getCharactersComplete)
                 .catch(getCharactersFailed);
 

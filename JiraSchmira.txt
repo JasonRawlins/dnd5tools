@@ -1,10 +1,9 @@
 Queue
 =======================================
-Display spell rating on individual spell pages
-Make spell rating stars
-Comment on spell
-
-
+Review a spell
+Amazon-type review experience. You review it, rate it, and add a comment. Then there is a "was this helpful" option for each review. 
+Comment on a review. Comments aren't displayed prominently though.
+Feedback control for site recommendations for alpha and beta testers. 
 
 Sprint cleanup
 =======================================
@@ -12,6 +11,7 @@ Generate database script
 
 Backlog
 =======================================
+Should I be using http interceptors to handle api 404s? 
 Each page should remember what sub tab it's on when the page is refreshed.
 Take over the world.
 Require a display name so emails aren't displayed publicly

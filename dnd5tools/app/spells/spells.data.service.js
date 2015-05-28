@@ -12,7 +12,7 @@
         };
 
         function getSpells() {
-            return $http.get("api/spells/")
+            return $http.get("api/v1/spells/")
                 .then(getSpellsComplete)
                 .catch(getSpellsFailed);
 
@@ -30,7 +30,7 @@
         }
 
         function getSpellsWithRatings() {
-            return $http.get("api/spellsWithRatings")
+            return $http.get("api/v1/spellsWithRatings")
                 .then(getSpellsWithRatingsComplete)
                 .catch(getSpellsWithRatingsFailed);
 

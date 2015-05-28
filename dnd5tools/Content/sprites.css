@@ -1,0 +1,59 @@
+﻿.sprite {
+    background: url('../../Images/spritesheet.png') no-repeat;
+}
+
+.rating-1, .rating-1-5, .rating-2, .rating-2-5, .rating-3, .rating-3-5, .rating-4, .rating-4-5, .rating-5 {
+    display: inline-block;
+    height: 16px;
+    width: 80px;
+}
+
+.rating-1 {
+    background-position: 0px 0px;
+}
+
+.rating-1-5 {
+    background-position: 0px -17px;
+}
+
+.rating-2 {
+    background-position: 0px -34px;
+}
+
+.rating-2-5 {
+    background-position: 0px -51px;
+}
+
+.rating-3 {
+    background-position: 0px -68px;
+}
+
+.rating-3-5 {
+    background-position: 0px -85px;
+}
+
+.rating-4 {
+    background-position: 0px -102px;
+}
+
+.rating-4-5 {
+    background-position: 0px -119px;
+}
+
+.rating-5 {
+    background-position: 0px -136px;
+}
+
+.star-empty, .star-full {
+    display: inline-block;
+    height: 16px;
+    width: 16px;
+}
+
+.star-empty {
+    background-position: -90px 0px;
+}
+
+.star-full {
+    background-position: -90px -17px;
+}

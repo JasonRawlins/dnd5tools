@@ -16,13 +16,13 @@ namespace dnd5tools.Controllers
     {
         private dnd5toolsDbContext db = new dnd5toolsDbContext();
 
-        //// GET: api/Character
+        //// GET: api/v1/Character
         //public IQueryable<Character> GetCharacters()
         //{
         //    return db.Characters;
         //}
 
-        // GET: api/Character/5
+        // GET: api/v1/Character/5
         [ResponseType(typeof(Character))]
         public IHttpActionResult GetCharacter(int id)
         {
@@ -36,7 +36,7 @@ namespace dnd5tools.Controllers
             return Ok(character);
         }
 
-        // PUT: api/Character/5
+        // PUT: api/v1/Character/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutCharacter(int id, Character character)
         {
