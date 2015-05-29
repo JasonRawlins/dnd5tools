@@ -31,13 +31,13 @@ namespace dnd5tools.Controllers {
             return Ok(spell);
         }
 
-        // GET: api/v1/SpellsWithRating
+        // GET: api/v1/SpellWithRating
         [Route("api/v1/spellsWithRatings")]
         public IQueryable<SpellWithRating> GetSpellsWithRatings() {
             return db.SpellWithRatings;
         }
 
-        // GET: api/v1/SpellsWithRating/5
+        // GET: api/v1/SpellWithRating/5
         [Route("api/v1/spellsWithRatings/{id:int}")]
         [ResponseType(typeof(SpellWithRating))]
         public IHttpActionResult GetSpellWithRating(int id) {

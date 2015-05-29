@@ -1,7 +1,7 @@
 ﻿(function () {
     "use strict";
 
-    angular.module("app").directive("ratingDisplay", rating);
+    angular.module("app").directive("rating", rating);
 
     function rating() {
         return {
@@ -10,12 +10,7 @@
             scope: {
                 value: "@"
             },
-            templateUrl: "app/rating/rating-display.html",
-            link: link
+            templateUrl: "app/reviews/rating.html"
         };
-
-        function link(scope, elem) {
-            
-        }
     }
 })();

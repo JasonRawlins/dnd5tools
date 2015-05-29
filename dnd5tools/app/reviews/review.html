@@ -1,0 +1,23 @@
+﻿<div>
+    Your rating: 
+    <ul class="review">
+        <li class="sprite star-full"
+            data-description="Awful - this spell is terrible and has few if any legitimate uses."></li>
+        <li class="sprite"
+            data-description="Situational - you probably won't use this spell in a typical adventure."
+            ng-class="{ 'star-empty': (!hovering && review.rating < 2) || (hovering && hoverRating < 2), 'star-full': (!hovering && review.rating >= 2) || (hovering && hoverRating >= 2) }"></li>
+        <li class="sprite"
+            data-description="Useful - this spell is often useful but you may not use it all the time."
+            ng-class="{ 'star-empty': (!hovering && review.rating < 3) || (hovering && hoverRating < 3), 'star-full': (!hovering && review.rating >= 3) || (hovering && hoverRating >= 3) }"></li>
+        <li class="sprite"
+            data-description="Very good - you will use this spell often."
+            ng-class="{ 'star-empty': (!hovering && review.rating < 4) || (hovering && hoverRating < 4), 'star-full': (!hovering && review.rating >= 4) || (hovering && hoverRating >= 4) }"></li>
+        <li class="sprite"
+            data-description="Exceptional - you will use this spell constantly."
+            ng-class="{ 'star-empty': (!hovering && review.rating < 5) || (hovering && hoverRating < 5), 'star-full': (!hovering && review.rating >= 5) || (hovering && hoverRating >= 5) }"></li>
+    </ul>
+    <p></p>
+    <textarea ng-bind="review.comment"></textarea>
+</div>
+
+

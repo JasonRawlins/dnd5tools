@@ -1,11 +1,11 @@
 ﻿(function () {
     "use strict";
 
-    angular.module("app").directive("ratingEdit", ratingEdit);
+    angular.module("app").directive("review", review);
 
-    ratingEdit.$inject = ["ratingDataService"];
+    review.$inject = ["reviewDataService"];
 
-    function ratingEdit(ratingDataService) {
+    function review(reviewDataService) {
         return {
             restrict: "E",
             replace: true,
@@ -13,15 +13,15 @@
                 type: "@",
                 entityId: "@"
             },
-            templateUrl: "app/rating/rating-edit.html",
+            templateUrl: "app/reviews/review.html",
             link: link
         };
 
         function link(scope, elem) {
-            var i, 
+            var i,
                 ratingUl = elem.find("ul"),
                 ratingLis = ratingUl.children(),
-                descriptionP = elem.find("p");
+                descriptionP = elem.find("p")[0];
 
             scope.hovering = false;
             scope.hoverRating = 0;
@@ -38,8 +38,8 @@
                     });
 
                     li.bind("click", function (event) {
-                        ratingDataService.rate(scope.type, scope.entityId, scope.hoverRating).then(function (rating) {
-                            scope.rating = rating.rating;
+                        reviewDataService.review(scope.type, scope.entityId, scope.hoverRating).then(function (review) {
+                            scope.review = review;
                         });
                     });
                 })(i);
@@ -60,9 +60,9 @@
 
             scope.$watch("entityId", function (newValue) {
                 if (newValue) {
-                    ratingDataService.getRating(scope.type, scope.entityId).then(function (rating) {
-                        if (rating !== null) {
-                            scope.rating = rating.rating;
+                    reviewDataService.getReview(scope.type, scope.entityId).then(function (review) {
+                        if (review !== null) {
+                            scope.review = review;
                         }
                     });
                 }
@@ -70,11 +70,3 @@
         }
     }
 })();
-
-
-// If rating is null, show all empty stars.
-// If rating is not null, show the correct number of stars.
-// If the user hovers over a star, make the current and all previous stars full.
-//      Display a message that describes the rating.
-//      When the user stops hovering, display correct rating again.
-// If the user clicks on a star, save their rating.

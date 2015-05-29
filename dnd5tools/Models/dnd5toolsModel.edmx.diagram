@@ -19,10 +19,10 @@
         <AssociationConnector Association="dnd5toolsModel.FK_Character_Race" />
         <EntityTypeShape EntityType="dnd5toolsModel.Spell" Width="1.5" PointX="0.75" PointY="7.75" />
         <EntityTypeShape EntityType="dnd5toolsModel.Class" Width="1.5" PointX="3.25" PointY="11.875" />
-        <EntityTypeShape EntityType="dnd5toolsModel.SpellRating" Width="1.5" PointX="3.25" PointY="8.375" />
-        <AssociationConnector Association="dnd5toolsModel.FK_SpellRating_Class" />
-        <AssociationConnector Association="dnd5toolsModel.FK_SpellRating_Spell" />
         <EntityTypeShape EntityType="dnd5toolsModel.SpellWithRating" Width="1.5" PointX="5.375" PointY="8.75" />
+        <EntityTypeShape EntityType="dnd5toolsModel.SpellReview" Width="1.5" PointX="3.25" PointY="8" />
+        <AssociationConnector Association="dnd5toolsModel.FK_SpellReview_Class" />
+        <AssociationConnector Association="dnd5toolsModel.FK_SpellReview_Spell" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

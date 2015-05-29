@@ -12,13 +12,14 @@ namespace dnd5tools.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class SpellRating
+    public partial class SpellReview
     {
-        public int SpellRatingID { get; set; }
+        public int SpellReviewID { get; set; }
         public string UserID { get; set; }
         public int SpellID { get; set; }
         public Nullable<int> ClassID { get; set; }
-        public int Rating { get; set; }
+        public double Rating { get; set; }
+        public string Comment { get; set; }
     
         public virtual Class Class { get; set; }
         public virtual Spell Spell { get; set; }

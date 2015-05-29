@@ -12,19 +12,19 @@ using dnd5tools.Models;
 
 namespace dnd5tools.Controllers
 {
-    public class CharacterController : ApiController
+    public class CharactersController : ApiController
     {
         private dnd5toolsDbContext db = new dnd5toolsDbContext();
 
-        //// GET: api/v1/Character
+        //// GET: api/v1/Characters
         //public IQueryable<Character> GetCharacters()
         //{
         //    return db.Characters;
         //}
 
-        // GET: api/v1/Character/5
+        // GET: api/v1/Characters/5
         [ResponseType(typeof(Character))]
-        public IHttpActionResult GetCharacter(int id)
+        public IHttpActionResult GetCharacters(int id)
         {
             var character = db.Characters.Include(c => c.Race).SingleOrDefault(c => c.CharacterID == id);
 
@@ -36,9 +36,9 @@ namespace dnd5tools.Controllers
             return Ok(character);
         }
 
-        // PUT: api/v1/Character/5
+        // PUT: api/v1/Characters/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutCharacter(int id, Character character)
+        public IHttpActionResult PutCharacters(int id, Character character)
         {
             if (!ModelState.IsValid)
             {
@@ -71,9 +71,9 @@ namespace dnd5tools.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        //// POST: api/Character
+        //// POST: api/Characters
         //[ResponseType(typeof(Character))]
-        //public IHttpActionResult PostCharacter(Character character)
+        //public IHttpActionResult PostCharacters(Character character)
         //{
         //    if (!ModelState.IsValid)
         //    {
@@ -86,9 +86,9 @@ namespace dnd5tools.Controllers
         //    return CreatedAtRoute("DefaultApi", new { id = character.CharacterID }, character);
         //}
 
-        //// DELETE: api/Character/5
+        //// DELETE: api/Characters/5
         //[ResponseType(typeof(Character))]
-        //public IHttpActionResult DeleteCharacter(int id)
+        //public IHttpActionResult DeleteCharacters(int id)
         //{
         //    Character character = db.Characters.Find(id);
         //    if (character == null)

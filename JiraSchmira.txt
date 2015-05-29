@@ -4,6 +4,8 @@ Review a spell
 Amazon-type review experience. You review it, rate it, and add a comment. Then there is a "was this helpful" option for each review. 
 Comment on a review. Comments aren't displayed prominently though.
 Feedback control for site recommendations for alpha and beta testers. 
+Reviews are editable by original reviewer.
+Reviews are read-only for all others.
 
 Sprint cleanup
 =======================================

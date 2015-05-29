@@ -64,13 +64,13 @@ ul {
     display: inline-block;
 }
 
-ul.rating-edit {
+ul.review {
     display: inline-block;
     margin: 0;
     cursor: pointer;
 }
 
-.rating-edit li {
+.review li {
     display: inline-block;
     height: 16px;
     width: 16px;
