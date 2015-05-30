@@ -224,29 +224,17 @@
     <Compile Include="Controllers\CharactersController.cs" />
     <Compile Include="Controllers\SpellReviewsController.cs" />
     <Compile Include="Controllers\SpellsController.cs" />
-    <Compile Include="Models\AspNetRole.cs">
-      <DependentUpon>dnd5toolsModel.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MeController.cs" />
     <Compile Include="Models\AspNetUser.cs">
-      <DependentUpon>dnd5toolsModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\AspNetUserClaim.cs">
-      <DependentUpon>dnd5toolsModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\AspNetUserLogin.cs">
       <DependentUpon>dnd5toolsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Character.cs">
       <DependentUpon>dnd5toolsModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\MeController.cs" />
     <Compile Include="Models\Class.cs">
-      <DependentUpon>dnd5toolsModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\C__MigrationHistory.cs">
       <DependentUpon>dnd5toolsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\dnd5toolsModel.Context.cs">
@@ -296,6 +284,8 @@
     <Content Include="app\common\directives\logOff.directive.js" />
     <Content Include="app\reviews\rating.directive.js" />
     <Content Include="app\reviews\rating.html" />
+    <Content Include="app\reviews\review-display.directive.js" />
+    <Content Include="app\reviews\review-display.html" />
     <Content Include="app\reviews\review.directive.js" />
     <Content Include="app\reviews\review.html" />
     <Content Include="app\reviews\review.data.service.js" />

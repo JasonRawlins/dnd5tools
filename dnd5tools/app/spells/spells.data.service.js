@@ -7,27 +7,28 @@
 
     function spellsDataService($http, spellService, log) {
         return {
-            getSpells: getSpells,
+            //getSpells: getSpells,
             getSpellsWithRatings: getSpellsWithRatings
         };
 
-        function getSpells() {
-            return $http.get("api/v1/spells/")
-                .then(getSpellsComplete)
-                .catch(getSpellsFailed);
+        //function getSpells() {
+        //    return $http.get("api/v1/spells/")
+        //        .then(getSpellsComplete)
+        //        .catch(getSpellsFailed);
 
-            function getSpellsComplete(response) {
-                return response.data.map(function (spell) {
-                    spellService.createSpell(spell);
+        //    function getSpellsComplete(response) {
+        //        return response.data.map(function (spell) {
+        //            spell.levelDescription = spellService.createLevelDescription(spell);
+        //            spell.url = spellService.createUrl(spell);
 
-                    return spell;
-                });
-            }
+        //            return spell;
+        //        });
+        //    }
 
-            function getSpellsFailed(error) {
-                log.error("XHR failed for getSpells. " + error.data);
-            }
-        }
+        //    function getSpellsFailed(error) {
+        //        log.error("XHR failed for getSpells. " + error.data);
+        //    }
+        //}
 
         function getSpellsWithRatings() {
             return $http.get("api/v1/spellsWithRatings")
@@ -36,7 +37,8 @@
 
             function getSpellsWithRatingsComplete(response) {
                 return response.data.map(function (spell) {
-                    spellService.createSpell(spell);
+                    spell.levelDescription = spellService.createLevelDescription(spell);
+                    spell.url = spellService.createUrl(spell);
 
                     return spell;
                 });

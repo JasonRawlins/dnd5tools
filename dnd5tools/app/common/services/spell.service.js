@@ -5,12 +5,16 @@
 
     function spellService() {
         return {
-            createSpell: createSpell
+            createLevelDescription: createLevelDescription,
+            createAverageRating: createAverageRating,
+            createUrl: createUrl
         };
 
-        function createSpell(spell) {
-
-            // Add complete level description
+        /**
+        * @param {Object} spell - a spell object.
+        * @returns {string} - the complete level description which ends up being similar to "1st-level evocation", "abjuration cantrip", "4th-level diviniation", etc.
+        */
+        function createLevelDescription(spell) {
             var levelOrdinal = "";
 
             if (spell.level === 1) {
@@ -23,12 +27,33 @@
                 levelOrdinal = spell.level + "th";
             }
 
-            spell.levelDescription = spell.level === 0
+            return spell.level === 0
                 ? spell.school + " cantrip"
                 : levelOrdinal + "-level " + spell.school;
+        }
 
-            // Add url that will be used in <a /> tags.
-            spell.url = spell.spellID + "/" + spell.name.replace(/\s+/g, "-").replace(/\//g, "-").toLowerCase();
+        /**
+        * @param {Object} spell - a spell object.
+        * @returns {number} - the average of all spell review ratings.
+        */
+        function createAverageRating(spell) {
+            var i,
+                l = spell.spellReviews.length,
+                ratingSum = 0;
+
+            for (i = 0; i < l; i++) {
+                ratingSum += spell.spellReviews[i].rating;
+            }
+
+            spell.rating = ratingSum / (l > 0 ? l : 1);
+        }
+
+        /**
+        * @param {Object} spell - a spell object.
+        * @returns {string} - a url property that can be used in <a /> tags to navigate to a spell details page.
+        */
+        function createUrl(spell) {
+            return spell.spellID + "/" + spell.name.replace(/\s+/g, "-").replace(/\//g, "-").toLowerCase();
         }
     }
 })();

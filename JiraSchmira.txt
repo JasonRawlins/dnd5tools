@@ -1,11 +1,14 @@
 Queue
 =======================================
+!! Display names, not emails
 Review a spell
 Amazon-type review experience. You review it, rate it, and add a comment. Then there is a "was this helpful" option for each review. 
 Comment on a review. Comments aren't displayed prominently though.
 Feedback control for site recommendations for alpha and beta testers. 
 Reviews are editable by original reviewer.
 Reviews are read-only for all others.
+If they have reviewed the spell, show their rating and a button to edit their review. Otherwise, show a button to create a review.
+Most helpful reviews at top
 
 Sprint cleanup
 =======================================

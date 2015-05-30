@@ -27,16 +27,12 @@ namespace dnd5tools.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
-        public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
-        public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
-        public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
-        public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<Race> Races { get; set; }
         public virtual DbSet<Character> Characters { get; set; }
         public virtual DbSet<Spell> Spells { get; set; }
         public virtual DbSet<Class> Classes { get; set; }
         public virtual DbSet<SpellWithRating> SpellWithRatings { get; set; }
         public virtual DbSet<SpellReview> SpellReviews { get; set; }
+        public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
     }
 }

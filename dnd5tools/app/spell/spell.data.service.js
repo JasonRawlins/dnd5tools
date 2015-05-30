@@ -7,8 +7,8 @@
 
     function spellDataService($http, spellService, log) {
         return {
-            getSpell: getSpell,
-            getSpellWithRating: getSpellWithRating
+            getSpell: getSpell
+            //, getSpellWithRating: getSpellWithRating
         };
 
         function getSpell(spellID) {
@@ -17,7 +17,10 @@
                 .catch(getSpellFailure);
 
             function getSpellComplete(response) {
-                spellService.createSpell(response.data);
+                var spell = response.data;
+
+                spell.levelDescription = spellService.createLevelDescription(spell);
+                spell.rating = spellService.createAverageRating(spell);
 
                 return response.data;
             }
@@ -27,20 +30,20 @@
             }
         }
 
-        function getSpellWithRating(spellID) {
-            return $http.get("api/v1/spellsWithRatings/" + spellID)
-                .then(getSpellWithRatingComplete)
-                .catch(getSpellWithRatingFailure);
+        //function getSpellWithRating(spellID) {
+        //    return $http.get("api/v1/spellsWithRatings/" + spellID)
+        //        .then(getSpellWithRatingComplete)
+        //        .catch(getSpellWithRatingFailure);
 
-            function getSpellWithRatingComplete(response) {
-                spellService.createSpell(response.data);
+        //    function getSpellWithRatingComplete(response) {
+        //        spellService.createSpell(response.data);
 
-                return response.data;
-            }
+        //        return response.data;
+        //    }
 
-            function getSpellWithRatingFailure(error) {
-                log.error("XHR failed for getSpellWithRating. " + error.data);
-            }
-        }
+        //    function getSpellWithRatingFailure(error) {
+        //        log.error("XHR failed for getSpellWithRating. " + error.data);
+        //    }
+        //}
     }
 })();

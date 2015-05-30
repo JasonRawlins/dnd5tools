@@ -18,10 +18,12 @@ namespace dnd5tools.Models
         public string UserID { get; set; }
         public int SpellID { get; set; }
         public Nullable<int> ClassID { get; set; }
-        public double Rating { get; set; }
+        public string Headline { get; set; }
         public string Comment { get; set; }
+        public double Rating { get; set; }
     
         public virtual Class Class { get; set; }
         public virtual Spell Spell { get; set; }
+        public virtual AspNetUser AspNetUser { get; set; }
     }
 }

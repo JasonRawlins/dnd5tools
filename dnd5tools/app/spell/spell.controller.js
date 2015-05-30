@@ -8,7 +8,7 @@
     function SpellController($routeParams, spellDataService) {
         var vm = this;
 
-        spellDataService.getSpellWithRating($routeParams.spellID).then(function (spell) {
+        spellDataService.getSpell($routeParams.spellID).then(function (spell) {
             vm.spell = spell;
         });
     }

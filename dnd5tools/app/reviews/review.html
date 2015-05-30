@@ -2,22 +2,22 @@
     Your rating: 
     <ul class="review">
         <li class="sprite star-full"
-            data-description="Awful - this spell is terrible and has few if any legitimate uses."></li>
+            data-description="Terrible"></li>
         <li class="sprite"
-            data-description="Situational - you probably won't use this spell in a typical adventure."
+            data-description="Bad"
             ng-class="{ 'star-empty': (!hovering && review.rating < 2) || (hovering && hoverRating < 2), 'star-full': (!hovering && review.rating >= 2) || (hovering && hoverRating >= 2) }"></li>
         <li class="sprite"
-            data-description="Useful - this spell is often useful but you may not use it all the time."
+            data-description="OK"
             ng-class="{ 'star-empty': (!hovering && review.rating < 3) || (hovering && hoverRating < 3), 'star-full': (!hovering && review.rating >= 3) || (hovering && hoverRating >= 3) }"></li>
         <li class="sprite"
-            data-description="Very good - you will use this spell often."
+            data-description="Good"
             ng-class="{ 'star-empty': (!hovering && review.rating < 4) || (hovering && hoverRating < 4), 'star-full': (!hovering && review.rating >= 4) || (hovering && hoverRating >= 4) }"></li>
         <li class="sprite"
-            data-description="Exceptional - you will use this spell constantly."
+            data-description="Excellent"
             ng-class="{ 'star-empty': (!hovering && review.rating < 5) || (hovering && hoverRating < 5), 'star-full': (!hovering && review.rating >= 5) || (hovering && hoverRating >= 5) }"></li>
+        <li ng-bind="ratingDescription"></li>
     </ul>
-    <p></p>
-    <textarea ng-bind="review.comment"></textarea>
+    <p ng-bind="review.comment"></p>
 </div>
 
 

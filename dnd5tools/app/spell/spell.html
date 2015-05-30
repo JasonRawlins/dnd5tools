@@ -13,5 +13,8 @@
     <div>
         <strong>Source:</strong> <span ng-bind="vm.spell.source + ' pg. ' + vm.spell.page"></span>
     </div>
-    <review type="spell" entity-id="{{vm.spell.spellID}}"></review>
+    <!--<review type="spell" entity-id="{{vm.spell.spellID}}"></review>-->
+    <div ng-repeat="spellReview in vm.spell.spellReviews">
+        <review-display review-type="spell" review="spellReview"></review-display>
+    </div>
 </div>

@@ -78,7 +78,7 @@ namespace dnd5tools.Models
         public int Platinum { get; set; }
         public string Class { get; set; }
     
-        public virtual AspNetUser AspNetUser { get; set; }
         public virtual Race Race { get; set; }
+        public virtual AspNetUser AspNetUser { get; set; }
     }
 }

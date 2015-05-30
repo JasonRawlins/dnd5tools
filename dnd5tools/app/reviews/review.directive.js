@@ -20,11 +20,11 @@
         function link(scope, elem) {
             var i,
                 ratingUl = elem.find("ul"),
-                ratingLis = ratingUl.children(),
-                descriptionP = elem.find("p")[0];
+                ratingLis = ratingUl.children();
 
             scope.hovering = false;
             scope.hoverRating = 0;
+            scope.ratingDescription = "";
 
             for (i = 0; i < ratingLis.length; i++) {
                 (function (j) {
@@ -33,7 +33,7 @@
                     li.bind("mouseenter", function (event) {
                         scope.$apply(function () {
                             scope.hoverRating = j + 1;
-                            descriptionP.text(event.currentTarget.dataset.description);
+                            scope.ratingDescription = event.currentTarget.dataset.description;
                         });
                     });
 
@@ -54,7 +54,7 @@
             ratingUl.bind("mouseleave", function (event) {
                 scope.$apply(function () {
                     scope.hovering = false;
-                    descriptionP.text("");
+                    scope.ratingDescription = "";
                 });
             });
 
