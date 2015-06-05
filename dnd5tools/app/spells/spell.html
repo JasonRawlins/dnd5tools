@@ -1,0 +1,8 @@
+﻿<div class="spell-details" ng-controller="SpellController as vm">
+    <spell-header spell="vm.spell" show-rating="true"></spell-header>
+    <input type="button" value="Write a review" ng-click="vm.reviewSpell()" />
+    <hr />
+    <div ng-repeat="spellReview in vm.spell.spellReviews">
+        <review-display review-type="spell" review="spellReview.review"></review-display>
+    </div>
+</div>

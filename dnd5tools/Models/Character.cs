@@ -17,6 +17,7 @@ namespace dnd5tools.Models
         public int CharacterID { get; set; }
         public string AspNetUserID { get; set; }
         public int RaceID { get; set; }
+        public string Class { get; set; }
         public string Name { get; set; }
         public int Str { get; set; }
         public int Dex { get; set; }
@@ -76,9 +77,8 @@ namespace dnd5tools.Models
         public int Electrum { get; set; }
         public int Gold { get; set; }
         public int Platinum { get; set; }
-        public string Class { get; set; }
     
-        public virtual Race Race { get; set; }
         public virtual AspNetUser AspNetUser { get; set; }
+        public virtual Race Race { get; set; }
     }
 }

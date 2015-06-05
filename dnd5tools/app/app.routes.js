@@ -14,10 +14,13 @@
                 templateUrl: "app/characters/characters.html",
             })
             .when("/spell/:spellID/:slug", {
-                templateUrl: "app/spell/spell.html"
+                templateUrl: "app/spells/spell.html"
             })
-            .when("/spells", {
-                templateUrl: "app/spells/spells.html"
+            .when("/spell-review/:spellID/:slug", {
+                templateUrl: "app/spells/spell-review.html"
+            })
+            .when("/spell-list", {
+                templateUrl: "app/spells/spell-list.html"
             })
             .otherwise({
                 redirectTo: "/"

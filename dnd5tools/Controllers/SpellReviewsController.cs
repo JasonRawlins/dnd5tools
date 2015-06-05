@@ -1,4 +1,5 @@
 ﻿using dnd5tools.Models;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,8 +7,10 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using System.Data.Entity;
 
 namespace dnd5tools.Controllers {
+    [Authorize()]
     public class SpellReviewsController : ApiController {
         private dnd5toolsDbContext db = new dnd5toolsDbContext();
 
@@ -15,7 +18,7 @@ namespace dnd5tools.Controllers {
         [Route("api/v1/spellreviews")]
         [ResponseType(typeof(SpellReview))]
         public IHttpActionResult GetSpellReviews(int spellID, string userID) {
-            SpellReview spellReview = db.SpellReviews.SingleOrDefault(sr => sr.SpellID == spellID && sr.UserID == userID);
+            SpellReview spellReview = db.SpellReviews.Include(sr => sr.Review).SingleOrDefault(sr => sr.SpellID == spellID && sr.Review.UserID == userID);
 
             if (spellReview == null) {
                 return NotFound();
@@ -28,16 +31,24 @@ namespace dnd5tools.Controllers {
         [Route("api/v1/spellreviews")]
         [ResponseType(typeof(SpellReview))]
         public IHttpActionResult PutSpellReviews(SpellReview newSpellReview) {
-            var spellReview = db.SpellReviews.SingleOrDefault(sr => sr.SpellID == newSpellReview.SpellID && sr.UserID == newSpellReview.UserID);
+            if (String.IsNullOrWhiteSpace(newSpellReview.Review.UserID)) {
+                newSpellReview.Review.UserID = User.Identity.GetUserId();
+            }
+
+            var spellReview = db.SpellReviews.Include(sr => sr.Review).SingleOrDefault(sr => sr.SpellID == newSpellReview.SpellID && sr.Review.UserID == newSpellReview.Review.UserID);
 
             // If the user has already rated this spell, update their rating.
             if (spellReview != null) {
-                spellReview.Comment = newSpellReview.Comment;
-                spellReview.Rating = newSpellReview.Rating;
+                spellReview.Review.Comment = newSpellReview.Review.Comment;
+                spellReview.Review.Rating = newSpellReview.Review.Rating;
+                spellReview.Review.Modified = DateTime.UtcNow;
             }
             else {
+                spellReview = newSpellReview;
+                spellReview.Review.Created = DateTime.UtcNow;
+                spellReview.Review.Modified = newSpellReview.Review.Created;
                 // Otherwise, add new rating.
-                db.SpellReviews.Add(newSpellReview);
+                db.SpellReviews.Add(spellReview);
             }
 
             db.SaveChanges();

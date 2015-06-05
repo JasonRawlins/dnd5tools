@@ -44,9 +44,8 @@ namespace dnd5tools.Models {
 
     public class LoginViewModel {
         [Required]
-        [Display(Name = "Email")]
-        [EmailAddress]
-        public string Email { get; set; }
+        [Display(Name = "Username")]
+        public string Username { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
@@ -58,6 +57,11 @@ namespace dnd5tools.Models {
     }
 
     public class RegisterViewModel {
+        [Required]
+        [StringLength(256, ErrorMessage = "Your username should be less than 256 characters.")]
+        [Display(Name = "Username")]
+        public string Username { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]

@@ -11,12 +11,38 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using dnd5tools.Models;
+using SendGrid;
+using System.Net.Mail;
+using System.Configuration;
+using System.Net;
 
 namespace dnd5tools {
     public class EmailService : IIdentityMessageService {
-        public Task SendAsync(IdentityMessage message) {
+        public async Task SendAsync(IdentityMessage message) {
             // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            await ConfigureSendGridAsync(message);
+        }
+
+        private async Task ConfigureSendGridAsync(IdentityMessage message) {
+            var sendGridMessage = new SendGridMessage();
+
+            sendGridMessage.AddTo(message.Destination);
+            sendGridMessage.From = new MailAddress("register@dnd5tools.com", "dnd5 tools");
+            sendGridMessage.Subject = message.Subject;
+            sendGridMessage.Text = message.Body;
+            sendGridMessage.Html = message.Body;
+
+            var credentials = new NetworkCredential(ConfigurationManager.AppSettings["sendGridUsername"], ConfigurationManager.AppSettings["sendGridPassword"]);
+
+            var transportWeb = new Web(credentials);
+
+            if (transportWeb != null) {
+                await transportWeb.DeliverAsync(sendGridMessage);
+            }
+            else {
+                // TODO: Log this issue
+                await Task.FromResult(0);
+            }
         }
     }
 

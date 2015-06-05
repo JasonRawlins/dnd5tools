@@ -16,6 +16,7 @@ Generate database script
 
 Backlog
 =======================================
+Enable client validation for web api tokens?
 Should I be using http interceptors to handle api 404s? 
 Each page should remember what sub tab it's on when the page is refreshed.
 Take over the world.

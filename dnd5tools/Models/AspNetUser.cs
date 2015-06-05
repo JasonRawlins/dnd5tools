@@ -17,13 +17,13 @@ namespace dnd5tools.Models
         public AspNetUser()
         {
             this.Characters = new HashSet<Character>();
-            this.SpellReviews = new HashSet<SpellReview>();
+            this.Reviews = new HashSet<Review>();
         }
     
         public string Id { get; set; }
         public string UserName { get; set; }
     
         public virtual ICollection<Character> Characters { get; set; }
-        public virtual ICollection<SpellReview> SpellReviews { get; set; }
+        public virtual ICollection<Review> Reviews { get; set; }
     }
 }

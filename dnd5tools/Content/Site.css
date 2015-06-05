@@ -64,14 +64,25 @@ ul {
     display: inline-block;
 }
 
-ul.review {
+ul.rating {
     display: inline-block;
     margin: 0;
     cursor: pointer;
 }
 
-.review li {
+.rating li {
     display: inline-block;
     height: 16px;
     width: 16px;
+}
+
+.rating-edit textarea {
+    height: 150px;
+    max-width: 600px;
+    width: 100%;
+}
+
+.rating-edit input[type="text"] {
+    max-width: 600px;
+    width: 100%;
 }

@@ -1,0 +1,31 @@
+﻿<div class="rating-edit">
+    Your rating: 
+    <ul class="rating">
+        <li class="sprite star-full"
+            data-description="Terrible"></li>
+        <li class="sprite"
+            data-description="Bad"
+            ng-class="{ 'star-empty': (!hovering && review.rating < 2) || (hovering && hoverRating < 2), 'star-full': (!hovering && review.rating >= 2) || (hovering && hoverRating >= 2) }"></li>
+        <li class="sprite"
+            data-description="OK"
+            ng-class="{ 'star-empty': (!hovering && review.rating < 3) || (hovering && hoverRating < 3), 'star-full': (!hovering && review.rating >= 3) || (hovering && hoverRating >= 3) }"></li>
+        <li class="sprite"
+            data-description="Good"
+            ng-class="{ 'star-empty': (!hovering && review.rating < 4) || (hovering && hoverRating < 4), 'star-full': (!hovering && review.rating >= 4) || (hovering && hoverRating >= 4) }"></li>
+        <li class="sprite"
+            data-description="Excellent"
+            ng-class="{ 'star-empty': (!hovering && review.rating < 5) || (hovering && hoverRating < 5), 'star-full': (!hovering && review.rating >= 5) || (hovering && hoverRating >= 5) }"></li>
+        <li ng-bind="ratingDescription"></li>
+    </ul>
+    <div>
+        <textarea ng-model="review.comment"></textarea>
+    </div>
+    <div>
+        <input ng-model="review.headline" type="text" />
+    </div>
+    <div>
+        <input type="button" value="Save" ng-click="saveReview({ review: review })" />
+    </div>
+</div>
+
+

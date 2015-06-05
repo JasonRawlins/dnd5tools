@@ -8,27 +8,27 @@
     function reviewDataService($http, authService, log) {
         return {
             getReview: getReview,
-            review: review
+            saveReview: saveReview
         };
 
-        function getReview(type, id) {
+        function getReview(type, entityID, userID) {
             switch (type.toLowerCase()) {
                 case "spell":
-                    return getSpellReview(id);
+                    return getSpellReview(entityID, userID);
                     break;
             }
         }
 
-        function review(type, id, review) {
+        function saveReview(type, review) {
             switch (type.toLowerCase()) {
                 case "spell":
-                    return reviewSpell(id, review);
+                    return reviewSpell(review);
                     break;
             }
         }
 
-        function getSpellReview(spellID) {
-            return $http.get("api/v1/spellreviews?spellID=" + spellID + "&userID=" + authService.user.id)
+        function getSpellReview(spellID, userID) {
+            return $http.get("api/v1/spellreviews?spellID=" + spellID + "&userID=" + userID)
                 .then(getSpellReviewComplete)
                 .catch(getSpellReviewFailed);
 
@@ -45,16 +45,16 @@
             }
         }
 
-        function reviewSpell(spellID, review) {
-            return $http.put("api/v1/spellreviews", review)
+        function reviewSpell(spellReview) {
+            return $http.put("api/v1/spellreviews", spellReview)
                 .then(reviewSpellComplete)
-                .catch(rateSpellFailed);
+                .catch(reviewSpellFailed);
 
             function reviewSpellComplete(response) {
                 return response.data;
             }
 
-            function rateSpellFailed(error) {
+            function reviewSpellFailed(error) {
                 log.error("XHR failed for reviewSpell. " + error.data);
             }
         }

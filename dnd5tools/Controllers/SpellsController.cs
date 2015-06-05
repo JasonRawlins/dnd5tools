@@ -22,7 +22,7 @@ namespace dnd5tools.Controllers {
         // GET: api/v1/Spells/5
         [ResponseType(typeof(Spell))]
         public IHttpActionResult GetSpell(int id) {
-            Spell spell = db.Spells.Include(s => s.SpellReviews.Select(sr => sr.AspNetUser)).SingleOrDefault(s => s.SpellID == id);
+            Spell spell = db.Spells.Include(s => s.SpellReviews.Select(sr => sr.Review.AspNetUser)).SingleOrDefault(s => s.SpellID == id);
 
             if (spell == null) {
                 return NotFound();

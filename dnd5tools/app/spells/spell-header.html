@@ -1,0 +1,16 @@
+﻿<header>
+    <h1>
+        <span ng-bind="spell.name"></span>
+        <rating-display ng-if="showRating" rating="{{spell.rating}}"></rating-display>
+    </h1>
+    <i ng-bind="spell.levelDescription"></i> <i ng-if="spell.isRitual">(ritual)</i> <i ng-if="spell.isConcentration">(concentration)</i>
+    <div>
+        <strong>Casting Time:</strong> <span ng-bind="spell.castingTime"></span>
+    </div>
+    <div>
+        <strong>Components:</strong> <span ng-bind="spell.components"></span> <i ng-if="spell.hasComponentCost">(cost)</i>
+    </div>
+    <div>
+        <strong>Source:</strong> <span ng-bind="spell.source + ' pg. ' + spell.page"></span>
+    </div>
+</header>

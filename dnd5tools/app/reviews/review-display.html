@@ -1,5 +1,8 @@
 ﻿<div>
-    <rating value="{{review.rating}}"></rating>
-    by <strong ng-bind="review.aspNetUser.userName"></strong>
+    <rating-display rating="{{review.rating}}"></rating-display>
+    <strong ng-bind="review.headline"></strong>
+    <div>
+        by <span ng-bind="review.aspNetUser.userName"></span> on <span ng-bind="review.dateTime | date:'MM/dd/yyyy'"></span>
+    </div>
     <p ng-bind="review.comment"></p>
 </div>

@@ -104,6 +104,18 @@
           <Property Name="RaceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="Review">
+          <Key>
+            <PropertyRef Name="ReviewID" />
+          </Key>
+          <Property Name="ReviewID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Headline" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Rating" Type="int" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="Modified" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="Spell">
           <Key>
             <PropertyRef Name="SpellID" />
@@ -127,27 +139,24 @@
             <PropertyRef Name="SpellReviewID" />
           </Key>
           <Property Name="SpellReviewID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="SpellID" Type="int" Nullable="false" />
           <Property Name="ClassID" Type="int" />
-          <Property Name="Headline" Type="nvarchar" MaxLength="1000" Nullable="false" />
-          <Property Name="Comment" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Rating" Type="float" Nullable="false" />
+          <Property Name="ReviewID" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'dnd5tools.dbo.SpellWithRating' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="SpellWithRating">
           <Key>
             <PropertyRef Name="SpellID" />
-            
-            
-            
-            
-            
-            
-            
-            
-            
+            <PropertyRef Name="School" />
+            <PropertyRef Name="CastingTime" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Level" />
+            <PropertyRef Name="IsRitual" />
+            <PropertyRef Name="IsConcentration" />
+            <PropertyRef Name="Components" />
+            <PropertyRef Name="Source" />
+            <PropertyRef Name="Page" />
           </Key>
           <Property Name="SpellID" Type="int" Nullable="false" />
           <Property Name="School" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -185,14 +194,14 @@ warning 6002: The table/view 'dnd5tools.dbo.SpellWithRating' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_SpellReview_AspNetUsers">
+        <Association Name="FK_Review_AspNetUsers">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
-          <End Role="SpellReview" Type="Self.SpellReview" Multiplicity="*" />
+          <End Role="Review" Type="Self.Review" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetUsers">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="SpellReview">
+            <Dependent Role="Review">
               <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
@@ -206,6 +215,18 @@ warning 6002: The table/view 'dnd5tools.dbo.SpellWithRating' does not have a pri
             </Principal>
             <Dependent Role="SpellReview">
               <PropertyRef Name="ClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SpellReview_Review">
+          <End Role="Review" Type="Self.Review" Multiplicity="1" />
+          <End Role="SpellReview" Type="Self.SpellReview" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Review">
+              <PropertyRef Name="ReviewID" />
+            </Principal>
+            <Dependent Role="SpellReview">
+              <PropertyRef Name="ReviewID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -226,6 +247,7 @@ warning 6002: The table/view 'dnd5tools.dbo.SpellWithRating' does not have a pri
           <EntitySet Name="Character" EntityType="Self.Character" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Class" EntityType="Self.Class" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Race" EntityType="Self.Race" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Review" EntityType="Self.Review" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Spell" EntityType="Self.Spell" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SpellReview" EntityType="Self.SpellReview" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SpellWithRating" EntityType="Self.SpellWithRating" store:Type="Views" store:Schema="dbo">
@@ -251,12 +273,16 @@ warning 6002: The table/view 'dnd5tools.dbo.SpellWithRating' does not have a pri
             <End Role="Race" EntitySet="Race" />
             <End Role="Character" EntitySet="Character" />
           </AssociationSet>
-          <AssociationSet Name="FK_SpellReview_AspNetUsers" Association="Self.FK_SpellReview_AspNetUsers">
+          <AssociationSet Name="FK_Review_AspNetUsers" Association="Self.FK_Review_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="SpellReview" EntitySet="SpellReview" />
+            <End Role="Review" EntitySet="Review" />
           </AssociationSet>
           <AssociationSet Name="FK_SpellReview_Class" Association="Self.FK_SpellReview_Class">
             <End Role="Class" EntitySet="Class" />
+            <End Role="SpellReview" EntitySet="SpellReview" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SpellReview_Review" Association="Self.FK_SpellReview_Review">
+            <End Role="Review" EntitySet="Review" />
             <End Role="SpellReview" EntitySet="SpellReview" />
           </AssociationSet>
           <AssociationSet Name="FK_SpellReview_Spell" Association="Self.FK_SpellReview_Spell">
@@ -269,41 +295,47 @@ warning 6002: The table/view 'dnd5tools.dbo.SpellWithRating' does not have a pri
     <edmx:ConceptualModels>
       <Schema Namespace="dnd5toolsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="dnd5toolsDbContext" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Races" EntityType="dnd5toolsModel.Race" />
+          <EntitySet Name="AspNetUsers" EntityType="dnd5toolsModel.AspNetUser" />
           <EntitySet Name="Characters" EntityType="dnd5toolsModel.Character" />
+          <EntitySet Name="Classes" EntityType="dnd5toolsModel.Class" />
+          <EntitySet Name="Races" EntityType="dnd5toolsModel.Race" />
+          <EntitySet Name="Spells" EntityType="dnd5toolsModel.Spell" />
+          <AssociationSet Name="FK_Character_AspNetUsers" Association="dnd5toolsModel.FK_Character_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="Character" EntitySet="Characters" />
+          </AssociationSet>
           <AssociationSet Name="FK_Character_Race" Association="dnd5toolsModel.FK_Character_Race">
             <End Role="Race" EntitySet="Races" />
             <End Role="Character" EntitySet="Characters" />
           </AssociationSet>
-          <EntitySet Name="Spells" EntityType="dnd5toolsModel.Spell" />
-          <EntitySet Name="Classes" EntityType="dnd5toolsModel.Class" />
-          <EntitySet Name="SpellWithRatings" EntityType="dnd5toolsModel.SpellWithRating" />
+          <EntitySet Name="Reviews" EntityType="dnd5toolsModel.Review" />
           <EntitySet Name="SpellReviews" EntityType="dnd5toolsModel.SpellReview" />
+          <EntitySet Name="SpellWithRatings" EntityType="dnd5toolsModel.SpellWithRating" />
+          <AssociationSet Name="FK_Review_AspNetUsers" Association="dnd5toolsModel.FK_Review_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="Review" EntitySet="Reviews" />
+          </AssociationSet>
           <AssociationSet Name="FK_SpellReview_Class" Association="dnd5toolsModel.FK_SpellReview_Class">
             <End Role="Class" EntitySet="Classes" />
+            <End Role="SpellReview" EntitySet="SpellReviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SpellReview_Review" Association="dnd5toolsModel.FK_SpellReview_Review">
+            <End Role="Review" EntitySet="Reviews" />
             <End Role="SpellReview" EntitySet="SpellReviews" />
           </AssociationSet>
           <AssociationSet Name="FK_SpellReview_Spell" Association="dnd5toolsModel.FK_SpellReview_Spell">
             <End Role="Spell" EntitySet="Spells" />
             <End Role="SpellReview" EntitySet="SpellReviews" />
           </AssociationSet>
-          <EntitySet Name="AspNetUsers" EntityType="dnd5toolsModel.AspNetUser" />
-          <AssociationSet Name="FK_Character_AspNetUsers" Association="dnd5toolsModel.FK_Character_AspNetUsers">
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
-            <End Role="Character" EntitySet="Characters" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SpellReview_AspNetUsers" Association="dnd5toolsModel.FK_SpellReview_AspNetUsers">
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
-            <End Role="SpellReview" EntitySet="SpellReviews" />
-          </AssociationSet>
           </EntityContainer>
-        <EntityType Name="Race">
+        <EntityType Name="AspNetUser">
           <Key>
-            <PropertyRef Name="RaceID" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="RaceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Characters" Relationship="dnd5toolsModel.FK_Character_Race" FromRole="Race" ToRole="Character" />
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Characters" Relationship="dnd5toolsModel.FK_Character_AspNetUsers" FromRole="AspNetUser" ToRole="Character" />
+          <NavigationProperty Name="Reviews" Relationship="dnd5toolsModel.FK_Review_AspNetUsers" FromRole="AspNetUser" ToRole="Review" />
         </EntityType>
         <EntityType Name="Character">
           <Key>
@@ -312,6 +344,7 @@ warning 6002: The table/view 'dnd5tools.dbo.SpellWithRating' does not have a pri
           <Property Name="CharacterID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="AspNetUserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="RaceID" Type="Int32" Nullable="false" />
+          <Property Name="Class" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Str" Type="Int32" Nullable="false" />
           <Property Name="Dex" Type="Int32" Nullable="false" />
@@ -319,7 +352,6 @@ warning 6002: The table/view 'dnd5tools.dbo.SpellWithRating' does not have a pri
           <Property Name="Int" Type="Int32" Nullable="false" />
           <Property Name="Wis" Type="Int32" Nullable="false" />
           <Property Name="Cha" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Race" Relationship="dnd5toolsModel.FK_Character_Race" FromRole="Character" ToRole="Race" />
           <Property Name="ProficiencyBonus" Type="Int32" Nullable="false" />
           <Property Name="StrengthSavingThrow" Type="Int32" Nullable="false" />
           <Property Name="DexteritySavingThrow" Type="Int32" Nullable="false" />
@@ -372,21 +404,25 @@ warning 6002: The table/view 'dnd5tools.dbo.SpellWithRating' does not have a pri
           <Property Name="Electrum" Type="Int32" Nullable="false" />
           <Property Name="Gold" Type="Int32" Nullable="false" />
           <Property Name="Platinum" Type="Int32" Nullable="false" />
-          <Property Name="Class" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUser" Relationship="dnd5toolsModel.FK_Character_AspNetUsers" FromRole="Character" ToRole="AspNetUser" />
+          <NavigationProperty Name="Race" Relationship="dnd5toolsModel.FK_Character_Race" FromRole="Character" ToRole="Race" />
         </EntityType>
-        <Association Name="FK_Character_Race">
-          <End Type="dnd5toolsModel.Race" Role="Race" Multiplicity="1" />
-          <End Type="dnd5toolsModel.Character" Role="Character" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Race">
-              <PropertyRef Name="RaceID" />
-            </Principal>
-            <Dependent Role="Character">
-              <PropertyRef Name="RaceID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <EntityType Name="Class">
+          <Key>
+            <PropertyRef Name="ClassID" />
+          </Key>
+          <Property Name="ClassID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SpellReviews" Relationship="dnd5toolsModel.FK_SpellReview_Class" FromRole="Class" ToRole="SpellReview" />
+        </EntityType>
+        <EntityType Name="Race">
+          <Key>
+            <PropertyRef Name="RaceID" />
+          </Key>
+          <Property Name="RaceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Characters" Relationship="dnd5toolsModel.FK_Character_Race" FromRole="Race" ToRole="Character" />
+        </EntityType>
         <EntityType Name="Spell">
           <Key>
             <PropertyRef Name="SpellID" />
@@ -406,17 +442,68 @@ warning 6002: The table/view 'dnd5tools.dbo.SpellWithRating' does not have a pri
           <Property Name="Page" Type="Int32" Nullable="false" />
           <NavigationProperty Name="SpellReviews" Relationship="dnd5toolsModel.FK_SpellReview_Spell" FromRole="Spell" ToRole="SpellReview" />
         </EntityType>
-        <EntityType Name="Class">
+        <Association Name="FK_Character_AspNetUsers">
+          <End Type="dnd5toolsModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="dnd5toolsModel.Character" Role="Character" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Character">
+              <PropertyRef Name="AspNetUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Character_Race">
+          <End Type="dnd5toolsModel.Race" Role="Race" Multiplicity="1" />
+          <End Type="dnd5toolsModel.Character" Role="Character" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Race">
+              <PropertyRef Name="RaceID" />
+            </Principal>
+            <Dependent Role="Character">
+              <PropertyRef Name="RaceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Review">
           <Key>
-            <PropertyRef Name="ClassID" />
+            <PropertyRef Name="ReviewID" />
           </Key>
-          <Property Name="ClassID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="SpellReviews" Relationship="dnd5toolsModel.FK_SpellReview_Class" FromRole="Class" ToRole="SpellReview" />
+          <Property Name="ReviewID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Headline" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Comment" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Rating" Type="Int32" Nullable="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Modified" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="AspNetUser" Relationship="dnd5toolsModel.FK_Review_AspNetUsers" FromRole="Review" ToRole="AspNetUser" />
+          <NavigationProperty Name="SpellReviews" Relationship="dnd5toolsModel.FK_SpellReview_Review" FromRole="Review" ToRole="SpellReview" />
+        </EntityType>
+        <EntityType Name="SpellReview">
+          <Key>
+            <PropertyRef Name="SpellReviewID" />
+          </Key>
+          <Property Name="SpellReviewID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SpellID" Type="Int32" Nullable="false" />
+          <Property Name="ClassID" Type="Int32" />
+          <Property Name="ReviewID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Class" Relationship="dnd5toolsModel.FK_SpellReview_Class" FromRole="SpellReview" ToRole="Class" />
+          <NavigationProperty Name="Review" Relationship="dnd5toolsModel.FK_SpellReview_Review" FromRole="SpellReview" ToRole="Review" />
+          <NavigationProperty Name="Spell" Relationship="dnd5toolsModel.FK_SpellReview_Spell" FromRole="SpellReview" ToRole="Spell" />
         </EntityType>
         <EntityType Name="SpellWithRating">
           <Key>
             <PropertyRef Name="SpellID" />
+            <PropertyRef Name="School" />
+            <PropertyRef Name="CastingTime" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Level" />
+            <PropertyRef Name="IsRitual" />
+            <PropertyRef Name="IsConcentration" />
+            <PropertyRef Name="Components" />
+            <PropertyRef Name="Source" />
+            <PropertyRef Name="Page" />
           </Key>
           <Property Name="SpellID" Type="Int32" Nullable="false" />
           <Property Name="School" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -430,21 +517,18 @@ warning 6002: The table/view 'dnd5tools.dbo.SpellWithRating' does not have a pri
           <Property Name="Page" Type="Int32" Nullable="false" />
           <Property Name="Rating" Type="Double" />
         </EntityType>
-        <EntityType Name="SpellReview">
-          <Key>
-            <PropertyRef Name="SpellReviewID" />
-          </Key>
-          <Property Name="SpellReviewID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="SpellID" Type="Int32" Nullable="false" />
-          <Property Name="ClassID" Type="Int32" />
-          <Property Name="Headline" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="Comment" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Rating" Type="Double" Nullable="false" />
-          <NavigationProperty Name="Class" Relationship="dnd5toolsModel.FK_SpellReview_Class" FromRole="SpellReview" ToRole="Class" />
-          <NavigationProperty Name="Spell" Relationship="dnd5toolsModel.FK_SpellReview_Spell" FromRole="SpellReview" ToRole="Spell" />
-          <NavigationProperty Name="AspNetUser" Relationship="dnd5toolsModel.FK_SpellReview_AspNetUsers" FromRole="SpellReview" ToRole="AspNetUser" />
-        </EntityType>
+        <Association Name="FK_Review_AspNetUsers">
+          <End Type="dnd5toolsModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="dnd5toolsModel.Review" Role="Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Review">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_SpellReview_Class">
           <End Type="dnd5toolsModel.Class" Role="Class" Multiplicity="0..1" />
           <End Type="dnd5toolsModel.SpellReview" Role="SpellReview" Multiplicity="*" />
@@ -454,6 +538,18 @@ warning 6002: The table/view 'dnd5tools.dbo.SpellWithRating' does not have a pri
             </Principal>
             <Dependent Role="SpellReview">
               <PropertyRef Name="ClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SpellReview_Review">
+          <End Type="dnd5toolsModel.Review" Role="Review" Multiplicity="1" />
+          <End Type="dnd5toolsModel.SpellReview" Role="SpellReview" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Review">
+              <PropertyRef Name="ReviewID" />
+            </Principal>
+            <Dependent Role="SpellReview">
+              <PropertyRef Name="ReviewID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -469,57 +565,23 @@ warning 6002: The table/view 'dnd5tools.dbo.SpellWithRating' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="AspNetUser">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Characters" Relationship="dnd5toolsModel.FK_Character_AspNetUsers" FromRole="AspNetUser" ToRole="Character" />
-          <NavigationProperty Name="SpellReviews" Relationship="dnd5toolsModel.FK_SpellReview_AspNetUsers" FromRole="AspNetUser" ToRole="SpellReview" />
-        </EntityType>
-        <Association Name="FK_Character_AspNetUsers">
-          <End Type="dnd5toolsModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
-          <End Type="dnd5toolsModel.Character" Role="Character" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUser">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Character">
-              <PropertyRef Name="AspNetUserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SpellReview_AspNetUsers">
-          <End Type="dnd5toolsModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
-          <End Type="dnd5toolsModel.SpellReview" Role="SpellReview" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUser">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="SpellReview">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="dnd5toolsModelStoreContainer" CdmEntityContainer="dnd5toolsDbContext">
-          <EntitySetMapping Name="Races">
-            <EntityTypeMapping TypeName="dnd5toolsModel.Race">
-              <MappingFragment StoreEntitySet="Race">
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="RaceID" ColumnName="RaceID" />
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="dnd5toolsModel.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Characters">
             <EntityTypeMapping TypeName="dnd5toolsModel.Character">
               <MappingFragment StoreEntitySet="Character">
-                <ScalarProperty Name="Class" ColumnName="Class" />
                 <ScalarProperty Name="Platinum" ColumnName="Platinum" />
                 <ScalarProperty Name="Gold" ColumnName="Gold" />
                 <ScalarProperty Name="Electrum" ColumnName="Electrum" />
@@ -579,9 +641,26 @@ warning 6002: The table/view 'dnd5tools.dbo.SpellWithRating' does not have a pri
                 <ScalarProperty Name="Dex" ColumnName="Dex" />
                 <ScalarProperty Name="Str" ColumnName="Str" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Class" ColumnName="Class" />
                 <ScalarProperty Name="RaceID" ColumnName="RaceID" />
                 <ScalarProperty Name="AspNetUserID" ColumnName="AspNetUserID" />
                 <ScalarProperty Name="CharacterID" ColumnName="CharacterID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Classes">
+            <EntityTypeMapping TypeName="dnd5toolsModel.Class">
+              <MappingFragment StoreEntitySet="Class">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Races">
+            <EntityTypeMapping TypeName="dnd5toolsModel.Race">
+              <MappingFragment StoreEntitySet="Race">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="RaceID" ColumnName="RaceID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -604,11 +683,26 @@ warning 6002: The table/view 'dnd5tools.dbo.SpellWithRating' does not have a pri
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Classes">
-            <EntityTypeMapping TypeName="dnd5toolsModel.Class">
-              <MappingFragment StoreEntitySet="Class">
-                <ScalarProperty Name="Name" ColumnName="Name" />
+          <EntitySetMapping Name="Reviews">
+            <EntityTypeMapping TypeName="dnd5toolsModel.Review">
+              <MappingFragment StoreEntitySet="Review">
+                <ScalarProperty Name="Modified" ColumnName="Modified" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Headline" ColumnName="Headline" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ReviewID" ColumnName="ReviewID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SpellReviews">
+            <EntityTypeMapping TypeName="dnd5toolsModel.SpellReview">
+              <MappingFragment StoreEntitySet="SpellReview">
+                <ScalarProperty Name="ReviewID" ColumnName="ReviewID" />
                 <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+                <ScalarProperty Name="SpellID" ColumnName="SpellID" />
+                <ScalarProperty Name="SpellReviewID" ColumnName="SpellReviewID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -626,27 +720,6 @@ warning 6002: The table/view 'dnd5tools.dbo.SpellWithRating' does not have a pri
                 <ScalarProperty Name="CastingTime" ColumnName="CastingTime" />
                 <ScalarProperty Name="School" ColumnName="School" />
                 <ScalarProperty Name="SpellID" ColumnName="SpellID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="SpellReviews">
-            <EntityTypeMapping TypeName="dnd5toolsModel.SpellReview">
-              <MappingFragment StoreEntitySet="SpellReview">
-                <ScalarProperty Name="Rating" ColumnName="Rating" />
-                <ScalarProperty Name="Comment" ColumnName="Comment" />
-                <ScalarProperty Name="Headline" ColumnName="Headline" />
-                <ScalarProperty Name="ClassID" ColumnName="ClassID" />
-                <ScalarProperty Name="SpellID" ColumnName="SpellID" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="SpellReviewID" ColumnName="SpellReviewID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AspNetUsers">
-            <EntityTypeMapping TypeName="dnd5toolsModel.AspNetUser">
-              <MappingFragment StoreEntitySet="AspNetUsers">
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

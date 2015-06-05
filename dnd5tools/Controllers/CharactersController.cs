@@ -10,10 +10,8 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using dnd5tools.Models;
 
-namespace dnd5tools.Controllers
-{
-    public class CharactersController : ApiController
-    {
+namespace dnd5tools.Controllers {
+    public class CharactersController : ApiController {
         private dnd5toolsDbContext db = new dnd5toolsDbContext();
 
         //// GET: api/v1/Characters
@@ -24,12 +22,10 @@ namespace dnd5tools.Controllers
 
         // GET: api/v1/Characters/5
         [ResponseType(typeof(Character))]
-        public IHttpActionResult GetCharacters(int id)
-        {
+        public IHttpActionResult GetCharacters(int id) {
             var character = db.Characters.Include(c => c.Race).SingleOrDefault(c => c.CharacterID == id);
 
-            if (character == null)
-            {
+            if (character == null) {
                 return NotFound();
             }
 
@@ -38,32 +34,25 @@ namespace dnd5tools.Controllers
 
         // PUT: api/v1/Characters/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutCharacters(int id, Character character)
-        {
-            if (!ModelState.IsValid)
-            {
+        public IHttpActionResult PutCharacters(int id, Character character) {
+            if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }
 
-            if (id != character.CharacterID)
-            {
+            if (id != character.CharacterID) {
                 return BadRequest();
             }
 
             db.Entry(character).State = EntityState.Modified;
 
-            try
-            {
+            try {
                 db.SaveChanges();
             }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CharacterExists(id))
-                {
+            catch (DbUpdateConcurrencyException) {
+                if (!CharacterExists(id)) {
                     return NotFound();
                 }
-                else
-                {
+                else {
                     throw;
                 }
             }
@@ -102,17 +91,14 @@ namespace dnd5tools.Controllers
         //    return Ok(character);
         //}
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
+        protected override void Dispose(bool disposing) {
+            if (disposing) {
                 db.Dispose();
             }
             base.Dispose(disposing);
         }
 
-        private bool CharacterExists(int id)
-        {
+        private bool CharacterExists(int id) {
             return db.Characters.Count(e => e.CharacterID == id) > 0;
         }
     }

@@ -68,3 +68,5 @@ packages/
 *.testsettings
 .nuget/NuGet.Config
 .nuget/NuGet.exe
+dnd5tools/appSettings.config
+dnd5tools/connectionStrings.config
