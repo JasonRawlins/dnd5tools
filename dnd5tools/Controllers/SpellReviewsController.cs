@@ -31,6 +31,24 @@ namespace dnd5tools.Controllers {
         [Route("api/v1/spellreviews")]
         [ResponseType(typeof(SpellReview))]
         public IHttpActionResult PutSpellReviews(SpellReview newSpellReview) {
+            var errorMessages = new List<string>();
+
+            if (string.IsNullOrWhiteSpace(newSpellReview.Review.Comment)) {
+                errorMessages.Add("Comment is required.");
+            }
+
+            if (string.IsNullOrWhiteSpace(newSpellReview.Review.Headline)) {
+                errorMessages.Add("Headline is required.");
+            }
+
+            if (newSpellReview.Review.Rating < 1) {
+                errorMessages.Add("Rating is required.");
+            }
+
+            if (errorMessages.Count() > 0) {
+                return BadRequest(string.Join(", ", errorMessages));
+            }
+            
             if (String.IsNullOrWhiteSpace(newSpellReview.Review.UserID)) {
                 newSpellReview.Review.UserID = User.Identity.GetUserId();
             }
@@ -40,6 +58,7 @@ namespace dnd5tools.Controllers {
             // If the user has already rated this spell, update their rating.
             if (spellReview != null) {
                 spellReview.Review.Comment = newSpellReview.Review.Comment;
+                spellReview.Review.Headline = newSpellReview.Review.Headline;
                 spellReview.Review.Rating = newSpellReview.Review.Rating;
                 spellReview.Review.Modified = DateTime.UtcNow;
             }

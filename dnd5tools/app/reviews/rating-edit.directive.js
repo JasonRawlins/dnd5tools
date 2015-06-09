@@ -21,8 +21,10 @@
                 ratingLis = ratingUl.children();
 
             scope.hovering = false;
-            scope.hoverRating = 1;
+            scope.hoverRating = 0;
             scope.ratingDescription = "";
+
+            scope.hasError = hasError;
 
             for (i = 0; i < ratingLis.length; i++) {
                 (function (j) {
@@ -53,6 +55,12 @@
                     scope.ratingDescription = "";
                 });
             });
+
+            function hasError(field, validation) {
+                if (validation) {
+                    return (scope.form[field].$dirty && scope.form[field].$error[validation]) || (scope.form.$submitted && scope.form[field].$error[validation]);
+                }
+            }
         }
     }
 })();

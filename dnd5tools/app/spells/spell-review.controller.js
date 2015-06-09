@@ -3,9 +3,9 @@
 
     angular.module("app").controller("SpellReviewController", SpellReviewController);
 
-    SpellReviewController.$inject = ["$routeParams", "authService", "reviewDataService", "spellDataService"];
+    SpellReviewController.$inject = ["$routeParams", "$location", "authService", "reviewDataService", "spellDataService"];
 
-    function SpellReviewController($routeParams, authService, reviewDataService, spellDataService) {
+    function SpellReviewController($routeParams, $location, authService, reviewDataService, spellDataService) {
         var vm = this;
 
         vm.saveReview = saveReview;
@@ -23,7 +23,7 @@
                         review: {
                             comment: "",
                             headline: "",
-                            rating: 1
+                            rating: 0
                         },
                         spellID: spell.spellID
                     }
@@ -33,7 +33,9 @@
 
         function saveReview() {
             reviewDataService.saveReview("spell", vm.spellReview).then(function (newReview) {
-                console.log(newReview.spellReviewID);
+                if (newReview) {
+                    $location.path("spell/" + vm.spell.url);
+                }
             });
         }
     }

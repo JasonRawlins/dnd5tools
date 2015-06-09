@@ -56,14 +56,6 @@ ul {
     float: right;
 }
 
-.spell-list li {
-    margin-bottom: 10px;
-}
-
-.spell-list h3 {
-    display: inline-block;
-}
-
 ul.rating {
     display: inline-block;
     margin: 0;
@@ -85,4 +77,20 @@ ul.rating {
 .rating-edit input[type="text"] {
     max-width: 600px;
     width: 100%;
+}
+
+.spell-list li {
+    margin-bottom: 10px;
+}
+
+.spell-list h3 {
+    display: inline-block;
+}
+
+.error {
+    border: 1px solid red;
+}
+
+.error-message {
+    color: red;
 }

@@ -56,6 +56,8 @@
 
             function reviewSpellFailed(error) {
                 log.error("XHR failed for reviewSpell. " + error.data);
+
+                return null;
             }
         }
     }

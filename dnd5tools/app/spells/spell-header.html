@@ -1,6 +1,6 @@
 ﻿<header>
     <h1>
-        <span ng-bind="spell.name"></span>
+        <a ng-href="#/spell/{{spell.url}}" ng-bind="spell.name"></a>
         <rating-display ng-if="showRating" rating="{{spell.rating}}"></rating-display>
     </h1>
     <i ng-bind="spell.levelDescription"></i> <i ng-if="spell.isRitual">(ritual)</i> <i ng-if="spell.isConcentration">(concentration)</i>
