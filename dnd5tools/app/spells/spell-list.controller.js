@@ -9,6 +9,7 @@
         var vm = this;
 
         vm.spellFilter = spellFilter;
+
         vm.search = {
             _class: {
                 bard: false,
@@ -60,6 +61,9 @@
             query: ""
         };
 
+        vm.predicate = "name";
+
+        // Get spell data.
         spellDataService.getClassSpells().then(function (classSpellList) {
             vm.classSpells = {
                 bard: getClassSpells("bard", classSpellList),
@@ -69,12 +73,26 @@
                 ranger: getClassSpells("ranger", classSpellList),
                 sorcerer: getClassSpells("sorcerer", classSpellList),
                 warlock: getClassSpells("warlock", classSpellList),
-                wizard: getClassSpells("wizard", classSpellList),
+                wizard: getClassSpells("wizard", classSpellList)
             };
+
+            /**
+            * @param {string} className - Name of the class.
+            * @param {number[]} classSpellList - Array of spellIDs from the class' spell list
+            * @returns {Object} The class name with the list of its spells.
+            */
+            function getClassSpells(className, classSpellList) {
+                return classSpellList.filter(function (classSpells) {
+                    return classSpells.class.toLowerCase() === className;
+                })[0];
+            }
         }).then(spellDataService.getSpellsWithRatings().then(function (spells) {
             vm.spells = spells;
         }));
 
+        /**
+        * @returns {boolean} Returns true if the spell matches all search conditions.
+        */
         function spellFilter() {
             return function (spell) {
                 
@@ -88,6 +106,10 @@
                     && (vm.search.query.length === 0 || spell.name.toLowerCase().indexOf(vm.search.query) >= 0); // Search box
             };
 
+            /**
+            * @param {number} spellID - The spellID
+            * @returns {boolean} Returns true if the spell is in a selected class' spell list.
+            */
             function spellClassSelected(spellID) {
                 return selectedClassHasSpell("bard") || selectedClassHasSpell("cleric") || selectedClassHasSpell("druid") || selectedClassHasSpell("paladin")
                     || selectedClassHasSpell("ranger") || selectedClassHasSpell("sorcerer") || selectedClassHasSpell("warlock") || selectedClassHasSpell("wizard");
@@ -96,12 +118,6 @@
                     return vm.search._class[className] && vm.classSpells[className].spellIDs.indexOf(spellID) >= 0;
                 }
             }
-        }
-
-        function getClassSpells(className, classSpellList) {
-            return classSpellList.filter(function (classSpells) {
-                return classSpells.class.toLowerCase() === className;
-            })[0];
         }
     }
 })();
