@@ -17,6 +17,7 @@ namespace dnd5tools.Models
         public Spell()
         {
             this.SpellReviews = new HashSet<SpellReview>();
+            this.Classes = new HashSet<Class>();
         }
     
         public int SpellID { get; set; }
@@ -34,5 +35,6 @@ namespace dnd5tools.Models
         public int Page { get; set; }
     
         public virtual ICollection<SpellReview> SpellReviews { get; set; }
+        public virtual ICollection<Class> Classes { get; set; }
     }
 }

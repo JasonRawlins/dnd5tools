@@ -17,11 +17,13 @@ namespace dnd5tools.Models
         public Class()
         {
             this.SpellReviews = new HashSet<SpellReview>();
+            this.Spells = new HashSet<Spell>();
         }
     
         public int ClassID { get; set; }
         public string Name { get; set; }
     
         public virtual ICollection<SpellReview> SpellReviews { get; set; }
+        public virtual ICollection<Spell> Spells { get; set; }
     }
 }

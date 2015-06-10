@@ -11,7 +11,8 @@
     function spellDataService($http, spellService, log) {
         return {
             getSpell: getSpell,
-            getSpellsWithRatings: getSpellsWithRatings
+            getSpellsWithRatings: getSpellsWithRatings,
+            getClassSpells: getClassSpells
         };
 
         function getSpell(spellID) {
@@ -50,6 +51,20 @@
 
             function getSpellsWithRatingsFailed(error) {
                 log.error("XHR failed for getSpellsWithRatingsFailed. " + error.data);
+            }
+        }
+
+        function getClassSpells() {
+            return $http.get("api/v1/classspells/")
+                .then(getClassSpellsComplete)
+                .catch(getClassSpellsFailed);
+
+            function getClassSpellsComplete(response) {
+                return response.data;
+            }
+
+            function getClassSpellsFailed(error) {
+                log.error("XHR failed for getClassSpells. " + error.data);
             }
         }
     }

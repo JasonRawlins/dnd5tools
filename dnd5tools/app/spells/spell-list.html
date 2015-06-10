@@ -1,12 +1,64 @@
 ﻿<div ng-controller="SpellListController as vm">
+    <div>
+        <div>
+            <strong>Class:</strong>  
+            <input type="checkbox" ng-model="vm.search._class.bard" /> Bard
+            <input type="checkbox" ng-model="vm.search._class.cleric" /> Cleric
+            <input type="checkbox" ng-model="vm.search._class.druid" /> Druid
+            <input type="checkbox" ng-model="vm.search._class.paladin" /> Paladin
+            <input type="checkbox" ng-model="vm.search._class.ranger" /> Ranger
+            <input type="checkbox" ng-model="vm.search._class.sorcerer" /> Sorcerer
+            <input type="checkbox" ng-model="vm.search._class.warlock" /> Warlock
+            <input type="checkbox" ng-model="vm.search._class.wizard" /> Wizard
+        </div>
+        <div>
+            <strong>School:</strong>
+            <input type="checkbox" ng-model="vm.search.school.abjuration" /> Abjuration
+            <input type="checkbox" ng-model="vm.search.school.conjuration" /> Conjuration
+            <input type="checkbox" ng-model="vm.search.school.divination" /> Divination
+            <input type="checkbox" ng-model="vm.search.school.enchantment" /> Enchantment
+            <input type="checkbox" ng-model="vm.search.school.evocation" /> Evocation
+            <input type="checkbox" ng-model="vm.search.school.illusion" /> Illusion
+            <input type="checkbox" ng-model="vm.search.school.necromancy" /> Necromancy
+            <input type="checkbox" ng-model="vm.search.school.transmutation" /> Transmutation
+
+        </div>
+        <div>
+            <strong>Level:</strong>
+            <input type="checkbox" ng-model="vm.search.level._0" /> Cantrip
+            <input type="checkbox" ng-model="vm.search.level._1" /> 1st
+            <input type="checkbox" ng-model="vm.search.level._2" /> 2nd
+            <input type="checkbox" ng-model="vm.search.level._3" /> 3rd
+            <input type="checkbox" ng-model="vm.search.level._4" /> 4th
+            <input type="checkbox" ng-model="vm.search.level._5" /> 5th
+            <input type="checkbox" ng-model="vm.search.level._6" /> 6th
+            <input type="checkbox" ng-model="vm.search.level._7" /> 7th
+            <input type="checkbox" ng-model="vm.search.level._8" /> 8th
+            <input type="checkbox" ng-model="vm.search.level._9" /> 9th
+        </div>
+        <div>
+            <strong>Other:</strong>
+            <input type="checkbox" ng-model="vm.search.isRitual" /> Ritual
+            <input type="checkbox" ng-model="vm.search.isConcentration" /> Concentration
+        </div>
+        <div>
+            <strong>Source:</strong>
+            <input type="checkbox" ng-model="vm.search.source.playersHandbook" /> Player's Handbook
+            <input type="checkbox" ng-model="vm.search.source.elementalEvil" /> Elemental Evil
+        </div>
+        <div>
+            <strong>Search:</strong> <input type="text" ng-model="vm.search.query" />
+        </div>
+
+    </div>
     <ul class="spell-list">
-        <li ng-repeat="spell in vm.spells">
+        <li ng-repeat="spell in vm.spells | filter:vm.spellFilter()">
             <h3><a ng-bind="spell.name" ng-href="#/spell/{{spell.url}}"></a></h3>
-            <i ng-bind="spell.levelDescription"></i> <i ng-if="spell.isRitual">(ritual)</i> <i ng-if="spell.isConcentration">(concentration)</i>
+            <rating-display rating="{{spell.rating}}"></rating-display>
+            / <i ng-bind="spell.levelDescription"></i> <i ng-if="spell.isRitual">(ritual)</i> <i ng-if="spell.isConcentration">(concentration)</i>
             / <span ng-bind="spell.castingTime"></span> 
             / <span ng-bind="spell.components"></span> <i ng-if="spell.hasComponentCost">(cost)</i>
             / <span ng-bind="spell.source + ' pg. ' + spell.page"></span>
-            / <rating-display rating="{{spell.rating}}"></rating-display>
         </li>
     </ul>
 </div>

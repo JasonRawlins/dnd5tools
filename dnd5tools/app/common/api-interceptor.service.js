@@ -8,8 +8,10 @@
     function apiInterceptor($cookies) {
         return {
             request: function (config) {
-                config.headers = config.headers || { };
-                config.headers.Authorization = "Bearer " + $cookies.get("access_token");
+                if (config.url.substring(0, 3) === "api") {
+                    config.headers = config.headers || {};
+                    config.headers.Authorization = "Bearer " + $cookies.get("access_token");
+                }
 
                 return config;
             }

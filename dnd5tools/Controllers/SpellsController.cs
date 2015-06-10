@@ -32,13 +32,13 @@ namespace dnd5tools.Controllers {
         }
 
         // GET: api/v1/SpellWithRating
-        [Route("api/v1/spellsWithRatings")]
+        [Route("api/v1/SpellsWithRatings")]
         public IQueryable<SpellWithRating> GetSpellsWithRatings() {
             return db.SpellWithRatings;
         }
 
         // GET: api/v1/SpellWithRating/5
-        [Route("api/v1/spellsWithRatings/{id:int}")]
+        [Route("api/v1/SpellsWithRatings/{id:int}")]
         [ResponseType(typeof(SpellWithRating))]
         public IHttpActionResult GetSpellWithRating(int id) {
             SpellWithRating spellWithRating = db.SpellWithRatings.SingleOrDefault(s => s.SpellID == id);
@@ -48,6 +48,31 @@ namespace dnd5tools.Controllers {
             }
 
             return Ok(spellWithRating);
+        }
+
+        // GET: api/v1/ClassSpells
+        [Route("api/v1/ClassSpells")]
+        [ResponseType(typeof(ClassSpellList[]))]
+        public ClassSpellList[] GetClassSpells() {
+            var classes = db.Classes.Include(c => c.Spells).ToArray();
+            var classSpellLists = new List<ClassSpellList>();
+
+            foreach (var _class in classes) {
+                if (_class.Spells.Count() > 0) {
+                    classSpellLists.Add(new ClassSpellList()
+                    {
+                        Class = _class.Name,
+                        SpellIDs = _class.Spells.Select(s => s.SpellID).ToArray()
+                    });
+                }
+            }
+
+            return classSpellLists.ToArray();
+        }
+
+        public class ClassSpellList {
+            public string Class { get; set; }
+            public int[] SpellIDs { get; set; }
         }
 
         //// PUT: api/Spells/5

@@ -19,6 +19,7 @@
         <AssociationConnector Association="dnd5toolsModel.FK_SpellReview_Class" />
         <AssociationConnector Association="dnd5toolsModel.FK_SpellReview_Review" />
         <AssociationConnector Association="dnd5toolsModel.FK_SpellReview_Spell" />
+        <AssociationConnector Association="dnd5toolsModel.ClassSpell" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

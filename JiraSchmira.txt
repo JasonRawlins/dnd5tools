@@ -1,36 +1,24 @@
 Queue
 =======================================
-Required fields for review (client and server)
-   with styling
-Re-route to spell list after review.
-Amazon-type review experience. You review it, rate it, and add a comment. Then there is a "was this helpful" option for each review. 
-Feedback control for site recommendations for alpha and beta testers. 
-Reviews are editable by original reviewer.
 Better HTML for reviews
-
-Sprint cleanup
-=======================================
-Generate database script
+Ensure only review authors can edit their reviews
+Finish populating spell database
+Spell sorting
 
 Backlog
 =======================================
-Log errors to database
-Is there a way to hide api 404s in the console? Angular is logging them before the responseError interceptor is fired. It doesn't appear to be happening in requestError, responseError, or response.
-Most helpful reviews at top
+Amazon-type review experience. You review it, rate it, and add a comment. Then there is a "was this helpful" option for each review. 
+Style all content. Possibly leverage Bootstrap.
+Feedback control for site recommendations for alpha and beta testers. 
 Comment on a review. Comments aren't displayed prominently though.
-Should I be using http interceptors to handle api 404s? 
+Log errors to database
+Most helpful reviews at top
 Each page should remember what sub tab it's on when the page is refreshed.
-Take over the world.
-Require a display name so emails aren't displayed publicly
-Character list links to character-details.
-    CharacterID is passed to the next view. 
-Store logged in user's id for use in the rest of the app.
 What is the appropriate response for a PUT for both success and failure? (updateCharacterComplete)
-Use flexbox instead of floats for layout
-Add and populate race table.
-Add Race column to Character table.
-Return race with character data.
-Display race on characters and character views.
+Should I be using http interceptors to handle api 404s? 
+Is there a way to hide api 404s in the console? Angular is logging them before the responseError interceptor is fired. It doesn't appear to be happening in requestError, responseError, or response.
+Use flexbox instead of floats for layout (does this matter if I use Bootstrap?)
+
 
 Release 1
 =======================================
