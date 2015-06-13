@@ -8,10 +8,26 @@
     */
     function spellService() {
         return {
+            calculateAverageRating: calculateAverageRating,
             createLevelDescription: createLevelDescription,
-            createAverageRating: createAverageRating,
             createUrl: createUrl
         };
+
+        /**
+        * @param {Object} spell - a spell object.
+        * @returns {number} - the average of all spell review ratings.
+        */
+        function calculateAverageRating(spell) {
+            var i,
+                l = spell.spellReviews.length,
+                ratingSum = 0;
+
+            for (i = 0; i < l; i++) {
+                ratingSum += spell.spellReviews[i].rating;
+            }
+
+            return ratingSum / (l > 0 ? l : 1);
+        }
 
         /**
         * @param {Object} spell - a spell object.
@@ -33,22 +49,6 @@
             return spell.level === 0
                 ? spell.school + " cantrip"
                 : levelOrdinal + "-level " + spell.school;
-        }
-
-        /**
-        * @param {Object} spell - a spell object.
-        * @returns {number} - the average of all spell review ratings.
-        */
-        function createAverageRating(spell) {
-            var i,
-                l = spell.spellReviews.length,
-                ratingSum = 0;
-
-            for (i = 0; i < l; i++) {
-                ratingSum += spell.spellReviews[i].rating;
-            }
-
-            return ratingSum / (l > 0 ? l : 1);
         }
 
         /**

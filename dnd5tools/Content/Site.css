@@ -94,3 +94,23 @@ ul.rating {
 .error-message {
     color: red;
 }
+
+.review {
+    width: 100%;
+}
+
+.review > div {
+    float: left;
+}
+
+.review p {
+    margin: 0;
+}
+
+.review .votes {
+    width: 40px;
+}
+
+.review .review-content {
+    width: 93%;
+}

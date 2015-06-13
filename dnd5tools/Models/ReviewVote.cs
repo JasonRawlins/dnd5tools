@@ -12,24 +12,14 @@ namespace dnd5tools.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Review
+    public partial class ReviewVote
     {
-        public Review()
-        {
-            this.SpellReviews = new HashSet<SpellReview>();
-            this.ReviewVotes = new HashSet<ReviewVote>();
-        }
-    
-        public int ReviewID { get; set; }
+        public int ReviewVoteID { get; set; }
         public string UserID { get; set; }
-        public string Headline { get; set; }
-        public string Comment { get; set; }
-        public int Rating { get; set; }
-        public System.DateTime Created { get; set; }
-        public System.DateTime Modified { get; set; }
+        public int ReviewID { get; set; }
+        public bool Vote { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
-        public virtual ICollection<SpellReview> SpellReviews { get; set; }
-        public virtual ICollection<ReviewVote> ReviewVotes { get; set; }
+        public virtual Review Review { get; set; }
     }
 }

@@ -24,7 +24,7 @@
                 var spell = response.data;
 
                 spell.levelDescription = spellService.createLevelDescription(spell);
-                spell.rating = spellService.createAverageRating(spell);
+                spell.rating = spellService.calculateAverageRating(spell);
                 spell.url = spellService.createUrl(spell);
 
                 return response.data;

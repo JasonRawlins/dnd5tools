@@ -1,24 +1,21 @@
 Queue
 =======================================
-Better HTML for reviews
-Ensure only review authors can edit their reviews
-Finish populating spell database
-Spell sorting
+Amazon-type review experience. 
+    "was this helpful" option for each review. 
+    Comment on a review. Comments aren't displayed prominently though.
+    Most helpful reviews at top.
+Users can't say their own review was helpful
 
 Backlog
 =======================================
-Amazon-type review experience. You review it, rate it, and add a comment. Then there is a "was this helpful" option for each review. 
 Style all content. Possibly leverage Bootstrap.
-Feedback control for site recommendations for alpha and beta testers. 
-Comment on a review. Comments aren't displayed prominently though.
 Log errors to database
-Most helpful reviews at top
+Feedback control for site recommendations for alpha and beta testers. 
 Each page should remember what sub tab it's on when the page is refreshed.
 What is the appropriate response for a PUT for both success and failure? (updateCharacterComplete)
 Should I be using http interceptors to handle api 404s? 
 Is there a way to hide api 404s in the console? Angular is logging them before the responseError interceptor is fired. It doesn't appear to be happening in requestError, responseError, or response.
 Use flexbox instead of floats for layout (does this matter if I use Bootstrap?)
-
 
 Release 1
 =======================================

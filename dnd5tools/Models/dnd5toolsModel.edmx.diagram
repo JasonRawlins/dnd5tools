@@ -20,6 +20,9 @@
         <AssociationConnector Association="dnd5toolsModel.FK_SpellReview_Review" />
         <AssociationConnector Association="dnd5toolsModel.FK_SpellReview_Spell" />
         <AssociationConnector Association="dnd5toolsModel.ClassSpell" />
+        <EntityTypeShape EntityType="dnd5toolsModel.ReviewVote" Width="1.5" PointX="5.125" PointY="2.25" />
+        <AssociationConnector Association="dnd5toolsModel.FK_ReviewVote_AspNetUsers" />
+        <AssociationConnector Association="dnd5toolsModel.FK_ReviewVote_Review" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -22,7 +22,23 @@ namespace dnd5tools.Controllers {
         // GET: api/v1/Spells/5
         [ResponseType(typeof(Spell))]
         public IHttpActionResult GetSpell(int id) {
-            Spell spell = db.Spells.Include(s => s.SpellReviews.Select(sr => sr.Review.AspNetUser)).SingleOrDefault(s => s.SpellID == id);
+            var spell = db.Spells.Include(s => s.SpellReviews.Select(sr => sr.Review)).AsNoTracking().SingleOrDefault(s => s.SpellID == id);
+
+            // Find users who have reviewed this spell.
+            var userIds = spell.SpellReviews.Select(sr => sr.Review.UserID).ToArray();
+            var users = db.AspNetUsers.Where(u => userIds.Contains(u.Id)).AsNoTracking().ToArray();
+
+            // Find the helpful reviews for each review.
+            var reviewIds = spell.SpellReviews.Select(sr => sr.Review.ReviewID).ToArray();
+            var reviewVotes = db.ReviewVotes.Where(hr => reviewIds.Contains(hr.Review.ReviewID)).AsNoTracking().ToArray();
+            
+            // Wire up the entities.
+            foreach (var spellReview in spell.SpellReviews) {
+                spellReview.Review.AspNetUser = users.Single(u => u.Id == spellReview.Review.UserID);
+                var votes = reviewVotes.Where(hr => hr.ReviewID == spellReview.Review.ReviewID).Select(rv => rv.Vote).ToArray();
+                spellReview.Review.UpVotes = votes.Where(v => v == true).Count();
+                spellReview.Review.DownVotes = votes.Where(v => v == false).Count();
+            }
 
             if (spell == null) {
                 return NotFound();

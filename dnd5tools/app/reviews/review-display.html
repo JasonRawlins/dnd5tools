@@ -1,8 +1,13 @@
-﻿<div>
-    <rating-display rating="{{review.rating}}"></rating-display>
-    <strong ng-bind="review.headline"></strong>
-    <div>
-        by <span ng-bind="review.aspNetUser.userName"></span> on <span ng-bind="review.created | date:'MM/dd/yyyy'"></span>
+﻿<article class="review clearfix">
+    <div class="votes">
+        <div class="sprite gray-up-vote"></div>
     </div>
-    <p ng-bind="review.comment"></p>
-</div>
+    <div class="review-content">
+        <rating-display rating="{{review.rating}}"></rating-display>
+        <strong ng-bind="review.headline"></strong>
+        <div>
+            by <span ng-bind="review.aspNetUser.userName"></span> on <span ng-bind="review.created | date:'MM/dd/yyyy'"></span>
+        </div>
+        <p ng-bind="review.comment"></p>
+    </div>
+</article>

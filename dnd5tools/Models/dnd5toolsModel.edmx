@@ -124,6 +124,15 @@
           <Property Name="Created" Type="datetime" Nullable="false" />
           <Property Name="Modified" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="ReviewVote">
+          <Key>
+            <PropertyRef Name="ReviewVoteID" />
+          </Key>
+          <Property Name="ReviewVoteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ReviewID" Type="int" Nullable="false" />
+          <Property Name="Vote" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="Spell">
           <Key>
             <PropertyRef Name="SpellID" />
@@ -238,6 +247,30 @@ warning 6002: The table/view 'dnd5tools.dbo.SpellWithRating' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ReviewVote_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="ReviewVote" Type="Self.ReviewVote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReviewVote">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReviewVote_Review">
+          <End Role="Review" Type="Self.Review" Multiplicity="1" />
+          <End Role="ReviewVote" Type="Self.ReviewVote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Review">
+              <PropertyRef Name="ReviewID" />
+            </Principal>
+            <Dependent Role="ReviewVote">
+              <PropertyRef Name="ReviewID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_SpellReview_Class">
           <End Role="Class" Type="Self.Class" Multiplicity="0..1" />
           <End Role="SpellReview" Type="Self.SpellReview" Multiplicity="*" />
@@ -281,6 +314,7 @@ warning 6002: The table/view 'dnd5tools.dbo.SpellWithRating' does not have a pri
           <EntitySet Name="ClassSpell" EntityType="Self.ClassSpell" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Race" EntityType="Self.Race" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Review" EntityType="Self.Review" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReviewVote" EntityType="Self.ReviewVote" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Spell" EntityType="Self.Spell" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SpellReview" EntityType="Self.SpellReview" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SpellWithRating" EntityType="Self.SpellWithRating" store:Type="Views" store:Schema="dbo">
@@ -317,6 +351,14 @@ warning 6002: The table/view 'dnd5tools.dbo.SpellWithRating' does not have a pri
           <AssociationSet Name="FK_Review_AspNetUsers" Association="Self.FK_Review_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Review" EntitySet="Review" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReviewVote_AspNetUsers" Association="Self.FK_ReviewVote_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="ReviewVote" EntitySet="ReviewVote" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReviewVote_Review" Association="Self.FK_ReviewVote_Review">
+            <End Role="Review" EntitySet="Review" />
+            <End Role="ReviewVote" EntitySet="ReviewVote" />
           </AssociationSet>
           <AssociationSet Name="FK_SpellReview_Class" Association="Self.FK_SpellReview_Class">
             <End Role="Class" EntitySet="Class" />
@@ -372,6 +414,15 @@ warning 6002: The table/view 'dnd5tools.dbo.SpellWithRating' does not have a pri
             <End Role="Class" EntitySet="Classes" />
             <End Role="Spell" EntitySet="Spells" />
           </AssociationSet>
+          <EntitySet Name="ReviewVotes" EntityType="dnd5toolsModel.ReviewVote" />
+          <AssociationSet Name="FK_ReviewVote_AspNetUsers" Association="dnd5toolsModel.FK_ReviewVote_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="ReviewVote" EntitySet="ReviewVotes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReviewVote_Review" Association="dnd5toolsModel.FK_ReviewVote_Review">
+            <End Role="Review" EntitySet="Reviews" />
+            <End Role="ReviewVote" EntitySet="ReviewVotes" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="AspNetUser">
           <Key>
@@ -381,6 +432,7 @@ warning 6002: The table/view 'dnd5tools.dbo.SpellWithRating' does not have a pri
           <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Characters" Relationship="dnd5toolsModel.FK_Character_AspNetUsers" FromRole="AspNetUser" ToRole="Character" />
           <NavigationProperty Name="Reviews" Relationship="dnd5toolsModel.FK_Review_AspNetUsers" FromRole="AspNetUser" ToRole="Review" />
+          <NavigationProperty Name="ReviewVotes" Relationship="dnd5toolsModel.FK_ReviewVote_AspNetUsers" FromRole="AspNetUser" ToRole="ReviewVote" />
         </EntityType>
         <EntityType Name="Character">
           <Key>
@@ -526,6 +578,7 @@ warning 6002: The table/view 'dnd5tools.dbo.SpellWithRating' does not have a pri
           <Property Name="Modified" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="AspNetUser" Relationship="dnd5toolsModel.FK_Review_AspNetUsers" FromRole="Review" ToRole="AspNetUser" />
           <NavigationProperty Name="SpellReviews" Relationship="dnd5toolsModel.FK_SpellReview_Review" FromRole="Review" ToRole="SpellReview" />
+          <NavigationProperty Name="ReviewVotes" Relationship="dnd5toolsModel.FK_ReviewVote_Review" FromRole="Review" ToRole="ReviewVote" />
         </EntityType>
         <EntityType Name="SpellReview">
           <Key>
@@ -615,6 +668,41 @@ warning 6002: The table/view 'dnd5tools.dbo.SpellWithRating' does not have a pri
         <Association Name="ClassSpell">
           <End Type="dnd5toolsModel.Class" Role="Class" Multiplicity="*" />
           <End Type="dnd5toolsModel.Spell" Role="Spell" Multiplicity="*" />
+        </Association>
+        <EntityType Name="ReviewVote">
+          <Key>
+            <PropertyRef Name="ReviewVoteID" />
+          </Key>
+          <Property Name="ReviewVoteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ReviewID" Type="Int32" Nullable="false" />
+          <Property Name="Vote" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="dnd5toolsModel.FK_ReviewVote_AspNetUsers" FromRole="ReviewVote" ToRole="AspNetUser" />
+          <NavigationProperty Name="Review" Relationship="dnd5toolsModel.FK_ReviewVote_Review" FromRole="ReviewVote" ToRole="Review" />
+        </EntityType>
+        <Association Name="FK_ReviewVote_AspNetUsers">
+          <End Type="dnd5toolsModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="dnd5toolsModel.ReviewVote" Role="ReviewVote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReviewVote">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReviewVote_Review">
+          <End Type="dnd5toolsModel.Review" Role="Review" Multiplicity="1" />
+          <End Type="dnd5toolsModel.ReviewVote" Role="ReviewVote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Review">
+              <PropertyRef Name="ReviewID" />
+            </Principal>
+            <Dependent Role="ReviewVote">
+              <PropertyRef Name="ReviewID" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
         </Schema>
     </edmx:ConceptualModels>
@@ -782,6 +870,16 @@ warning 6002: The table/view 'dnd5tools.dbo.SpellWithRating' does not have a pri
               <ScalarProperty Name="ClassID" ColumnName="ClassID" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="ReviewVotes">
+            <EntityTypeMapping TypeName="dnd5toolsModel.ReviewVote">
+              <MappingFragment StoreEntitySet="ReviewVote">
+                <ScalarProperty Name="Vote" ColumnName="Vote" />
+                <ScalarProperty Name="ReviewID" ColumnName="ReviewID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ReviewVoteID" ColumnName="ReviewVoteID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

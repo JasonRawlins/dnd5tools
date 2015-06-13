@@ -57,3 +57,25 @@
 .star-full {
     background-position: -90px -17px;
 }
+
+.up-vote, .down-vote, .gray-up-vote, .gray-down-vote {
+    height: 16px;
+    width: 26px;
+}
+
+.up-vote {
+    background-position: -32px -154px;
+}
+
+.down-vote {
+    background-position: -32px -173px;
+}
+
+.gray-up-vote {
+    background-position: 0px -154px;
+}
+
+.gray-down-vote {
+    background-position: 0px -173px;
+}
+

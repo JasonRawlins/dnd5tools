@@ -267,10 +267,14 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MeViewModels.cs" />
+    <Compile Include="Models\Partials\Review.cs" />
     <Compile Include="Models\Race.cs">
       <DependentUpon>dnd5toolsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Review.cs">
+      <DependentUpon>dnd5toolsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ReviewVote.cs">
       <DependentUpon>dnd5toolsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Spell.cs">
