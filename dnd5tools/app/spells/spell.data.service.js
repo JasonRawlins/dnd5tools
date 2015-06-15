@@ -3,12 +3,12 @@
 
     angular.module("app").factory("spellDataService", spellDataService);
 
-    spellDataService.$inject = ["$http", "spellService", "log"];
+    spellDataService.$inject = ["$http", "spellService", "authService", "log"];
 
     /**
     * Used to retrieve data from the API.
     */
-    function spellDataService($http, spellService, log) {
+    function spellDataService($http, spellService, authService, log) {
         return {
             getSpell: getSpell,
             getSpellsWithRatings: getSpellsWithRatings,
@@ -16,7 +16,7 @@
         };
 
         function getSpell(spellID) {
-            return $http.get("api/v1/spells/" + spellID)
+            return $http.get("api/v1/spells/" + spellID + "?userID=" + authService.user.id)
                 .then(getSpellComplete)
                 .catch(getSpellFailure);
 

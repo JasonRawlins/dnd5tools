@@ -21,27 +21,27 @@ namespace dnd5tools.Controllers {
 
         // GET: api/v1/Spells/5
         [ResponseType(typeof(Spell))]
-        public IHttpActionResult GetSpell(int id) {
+        public IHttpActionResult GetSpell(int id, string userID) {
             var spell = db.Spells.Include(s => s.SpellReviews.Select(sr => sr.Review)).AsNoTracking().SingleOrDefault(s => s.SpellID == id);
+
+            if (spell == null) {
+                return NotFound();
+            }
 
             // Find users who have reviewed this spell.
             var userIds = spell.SpellReviews.Select(sr => sr.Review.UserID).ToArray();
             var users = db.AspNetUsers.Where(u => userIds.Contains(u.Id)).AsNoTracking().ToArray();
 
-            // Find the helpful reviews for each review.
+            // Find the review votes for reviews of this spell.
             var reviewIds = spell.SpellReviews.Select(sr => sr.Review.ReviewID).ToArray();
             var reviewVotes = db.ReviewVotes.Where(hr => reviewIds.Contains(hr.Review.ReviewID)).AsNoTracking().ToArray();
-            
+
             // Wire up the entities.
             foreach (var spellReview in spell.SpellReviews) {
                 spellReview.Review.AspNetUser = users.Single(u => u.Id == spellReview.Review.UserID);
-                var votes = reviewVotes.Where(hr => hr.ReviewID == spellReview.Review.ReviewID).Select(rv => rv.Vote).ToArray();
-                spellReview.Review.UpVotes = votes.Where(v => v == true).Count();
-                spellReview.Review.DownVotes = votes.Where(v => v == false).Count();
-            }
-
-            if (spell == null) {
-                return NotFound();
+                spellReview.Review.ReviewVotes = reviewVotes.Where(hr => hr.ReviewID == spellReview.Review.ReviewID && hr.UserID == userID).ToArray();
+                spellReview.Review.UpVotes = spellReview.Review.ReviewVotes.Select(rv => rv.Vote).Where(v => v == true).Count();
+                spellReview.Review.DownVotes = spellReview.Review.ReviewVotes.Select(rv => rv.Vote).Where(v => v == false).Count();
             }
 
             return Ok(spell);

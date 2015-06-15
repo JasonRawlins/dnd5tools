@@ -58,7 +58,7 @@
     background-position: -90px -17px;
 }
 
-.up-vote, .down-vote, .gray-up-vote, .gray-down-vote {
+.up-vote, .down-vote, .no-up-vote, .no-down-vote {
     height: 16px;
     width: 26px;
 }
@@ -71,11 +71,11 @@
     background-position: -32px -173px;
 }
 
-.gray-up-vote {
+.no-up-vote {
     background-position: 0px -154px;
 }
 
-.gray-down-vote {
+.no-down-vote {
     background-position: 0px -173px;
 }
 

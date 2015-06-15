@@ -1,6 +1,7 @@
 ﻿<article class="review clearfix">
     <div class="votes">
-        <div class="sprite gray-up-vote"></div>
+        <div class="sprite" ng-class="{ 'no-up-vote': !userVoted || (userVoted && downVoted), 'up-vote': upVoted }" ng-click="castVote(true)"></div>
+        <div class="sprite" ng-class="{ 'no-down-vote': !userVoted || (userVoted && upVoted), 'down-vote': downVoted }" ng-click="castVote(false)"></div>
     </div>
     <div class="review-content">
         <rating-display rating="{{review.rating}}"></rating-display>

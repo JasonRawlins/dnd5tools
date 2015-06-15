@@ -3,14 +3,26 @@
 
     angular.module("app").factory("reviewDataService", reviewDataService);
 
-    reviewDataService.$inject = ["$http", "authService", "log"];
+    reviewDataService.$inject = ["$http", "log"];
 
-    function reviewDataService($http, authService, log) {
+    /**
+    * Manages retrieval and saving of review related operations.
+    * @param {Object} $http - angular $http service.
+    * @param {Object} log - The log service for errors.
+    */
+    function reviewDataService($http, log) {
         return {
             getReview: getReview,
-            saveReview: saveReview
+            saveReview: saveReview,
+            castReviewVote: castReviewVote
         };
 
+        /**
+        * Routes the request to get a review to the correct function.
+        * @param {string} type - The type of review to retrieve (e.g. spell, skill, class).
+        * @param {number} entityID - The entity's id (e.g. spellID, skillID, classID).
+        * @param {number} userID - The logged in user's id.
+        */
         function getReview(type, entityID, userID) {
             switch (type.toLowerCase()) {
                 case "spell":
@@ -19,6 +31,11 @@
             }
         }
 
+        /**
+        * Routes the save request to the correct function.
+        * @param {string} type - The type of review to save (e.g. spell, skill, class).
+        * @param {Object} review - The review to save. 
+        */
         function saveReview(type, review) {
             switch (type.toLowerCase()) {
                 case "spell":
@@ -56,6 +73,22 @@
 
             function reviewSpellFailed(error) {
                 log.error("XHR failed for reviewSpell. " + error.data);
+
+                return null;
+            }
+        }
+
+        function castReviewVote(reviewVote) {
+            return $http.put("api/v1/reviewvotes", reviewVote)
+                .then(castReviewVoteComplete)
+                .catch(castReviewVoteFailed);
+
+            function castReviewVoteComplete(response) {
+                return response.data;
+            }
+
+            function castReviewVoteFailed(error) {
+                log.error("XHR failed for castReviewVote. " + error.data);
 
                 return null;
             }

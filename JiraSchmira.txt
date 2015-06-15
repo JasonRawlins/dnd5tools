@@ -8,7 +8,9 @@ Users can't say their own review was helpful
 
 Backlog
 =======================================
+Make sure the authenticated and anonymous user experiences are correct.
 Style all content. Possibly leverage Bootstrap.
+LESS
 Log errors to database
 Feedback control for site recommendations for alpha and beta testers. 
 Each page should remember what sub tab it's on when the page is refreshed.

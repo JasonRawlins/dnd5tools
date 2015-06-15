@@ -49,7 +49,7 @@ namespace dnd5tools.Controllers {
                 return BadRequest(string.Join(", ", errorMessages));
             }
             
-            if (String.IsNullOrWhiteSpace(newSpellReview.Review.UserID)) {
+            if (string.IsNullOrWhiteSpace(newSpellReview.Review.UserID)) {
                 newSpellReview.Review.UserID = User.Identity.GetUserId();
             }
 

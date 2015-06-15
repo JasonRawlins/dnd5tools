@@ -114,3 +114,8 @@ ul.rating {
 .review .review-content {
     width: 93%;
 }
+
+.votes > div {
+    margin: 0 auto;
+    margin-top: 6px;
+}

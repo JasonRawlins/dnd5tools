@@ -3,6 +3,9 @@
 
     angular.module("app").directive("logOff", logOff);
 
+    /**
+    * Logs the user out of the site. 
+    */
     function logOff() {
         return {
             restrict: "A",

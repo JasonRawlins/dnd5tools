@@ -5,6 +5,10 @@
 
     apiInterceptor.$inject = ["$cookies"];
 
+    /**
+    * Adds the bearer token to the headers for all api requests.
+    * @param {Object} $cookies - angular cookies module.
+    */
     function apiInterceptor($cookies) {
         return {
             request: function (config) {
