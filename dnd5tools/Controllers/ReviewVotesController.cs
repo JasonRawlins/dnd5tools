@@ -22,19 +22,25 @@ namespace dnd5tools.Controllers {
                 newReviewVote.UserID = User.Identity.GetUserId();
             }
 
-            var reviewVote = db.ReviewVotes.SingleOrDefault(rv => rv.ReviewID == newReviewVote.ReviewID && rv.UserID == newReviewVote.UserID);
+            var exisitingReviewVote = db.ReviewVotes.Include(rv => rv.Review).SingleOrDefault(rv => rv.ReviewID == newReviewVote.ReviewID && rv.UserID == newReviewVote.UserID);
 
-            if (reviewVote != null) {
-                reviewVote.Vote = newReviewVote.Vote;
+            if (exisitingReviewVote != null) {
+                if (exisitingReviewVote.Vote == newReviewVote.Vote) {
+                    // The user is trying to cancel their vote.
+                    db.ReviewVotes.Remove(exisitingReviewVote);
+                }
+                else {
+                    exisitingReviewVote.Vote = newReviewVote.Vote;
+                }
             }
             else {
-                reviewVote = newReviewVote;
-                db.ReviewVotes.Add(reviewVote);
+                exisitingReviewVote = newReviewVote;
+                db.ReviewVotes.Add(exisitingReviewVote);
             }
 
             db.SaveChanges();
 
-            return Ok(reviewVote);
+            return Ok(exisitingReviewVote);
         }
     }
 }

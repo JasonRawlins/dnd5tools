@@ -40,10 +40,12 @@ namespace dnd5tools.Controllers {
             foreach (var spellReview in spell.SpellReviews) {
                 spellReview.Review.AspNetUser = users.Single(u => u.Id == spellReview.Review.UserID);
                 spellReview.Review.ReviewVotes = reviewVotes.Where(hr => hr.ReviewID == spellReview.Review.ReviewID && hr.UserID == userID).ToArray();
-                var upVotes = spellReview.Review.ReviewVotes.Select(rv => rv.Vote).Where(v => v == true).Count();
-                var downVotes = spellReview.Review.ReviewVotes.Select(rv => rv.Vote).Where(v => v == false).Count();
+                var upVotes = reviewVotes.Where(rv => rv.ReviewID == spellReview.Review.ReviewID && rv.Vote == true).Count();
+                var downVotes = reviewVotes.Where(rv => rv.ReviewID == spellReview.Review.ReviewID && rv.Vote == false).Count();
                 spellReview.Review.Score = upVotes - downVotes;
             }
+
+            spell.SpellReviews = spell.SpellReviews.OrderByDescending(sr => sr.Review.Score).ToArray();
 
             return Ok(spell);
         }
