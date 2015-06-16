@@ -20,7 +20,7 @@
             },
             templateUrl: "app/reviews/review-display.html",
             link: function (scope) {
-                setUserReviewVote();
+                setVoteProperties();
 
                 scope.castVote = castVote;
                 
@@ -29,11 +29,13 @@
                 * @param {boolean} vote - true for upvote, false for downvote.
                 */
                 function castVote(vote) {
-                    reviewDataService.castReviewVote(
-                        {
-                            reviewID: scope.review.reviewID,
-                            vote: vote
-                        }).then(updateReviewVote);
+                    if (scope.review.aspNetUser.id !== authService.user.id) {
+                        reviewDataService.castReviewVote(
+                            {
+                                reviewID: scope.review.reviewID,
+                                vote: vote
+                            }).then(updateReviewVote);
+                    }
 
                     /**
                     * After the vote has been cast, this function updates the existing review vote (if any) or saves the new review vote.
@@ -43,13 +45,20 @@
                         if (newReviewVote) {
                             var existingReviewVote = getUserReviewVote();
 
+                            // If it's a new vote or an existing vote with a different vote value, update count.
+                            if (!existingReviewVote || (existingReviewVote && existingReviewVote.vote != newReviewVote.vote)) {
+                                scope.review.score += newReviewVote.vote ? 1 : -1;
+                            }
+
                             if (existingReviewVote) {
                                 existingReviewVote.vote = newReviewVote.vote;
                             } else {
                                 scope.review.reviewVotes.push(newReviewVote);
                             }
 
-                            setUserReviewVote();
+                            
+
+                            setVoteProperties();
                         }
                     }
                 }
@@ -66,7 +75,7 @@
                 /**
                 * Sets values related to the current user's votes on this review.
                 */
-                function setUserReviewVote() {
+                function setVoteProperties() {
                     var userReviewVote = getUserReviewVote();
 
                     if (userReviewVote) {

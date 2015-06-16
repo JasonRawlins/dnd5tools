@@ -5,7 +5,6 @@ using System.Web;
 
 namespace dnd5tools.Models {
     public partial class Review {
-        public int UpVotes { get; set; }
-        public int DownVotes { get; set; }
+        public int Score { get; set; }
     }
 }

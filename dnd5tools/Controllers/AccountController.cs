@@ -82,6 +82,7 @@ namespace dnd5tools.Controllers {
             var user = await UserManager.FindByNameAsync(model.Username);
             if (user != null) {
                 if (!await UserManager.IsEmailConfirmedAsync(user.Id)) {
+                    string callbackUrl = await SendEmailConfirmationTokenAsync(user.Id);
                     ViewBag.ErrorMessage = "You must confirm your email to log in. Please check your email (including your junk email) for the confirmation link.";
                     return View("Error");
                 }
@@ -180,13 +181,11 @@ namespace dnd5tools.Controllers {
                 if (result.Succeeded) {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
-                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    var callbackUrl = await SendEmailConfirmationTokenAsync(user.Id);
 
                     TempData["ViewBagLink"] = callbackUrl;
 
-                    ViewBag.Message = "Check your email and confirm your account. You must be confirmed before you can log in.";
+                    ViewBag.Message = "Check your email and confirm your account. You must be confirmed before you can log in. It takes about 30 seconds to get the email.";
 
                     return View("Info");
 
@@ -225,7 +224,7 @@ namespace dnd5tools.Controllers {
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ForgotPassword(ForgotPasswordViewModel model) {
             if (ModelState.IsValid) {
-                var user = await UserManager.FindByNameAsync(model.Email);
+                var user = await UserManager.FindByEmailAsync(model.Email);
                 if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id))) {
                     // Don't reveal that the user does not exist or is not confirmed
                     return View("ForgotPasswordConfirmation");
@@ -233,10 +232,10 @@ namespace dnd5tools.Controllers {
 
                 // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
             // If we got this far, something failed, redisplay form
@@ -266,7 +265,7 @@ namespace dnd5tools.Controllers {
             if (!ModelState.IsValid) {
                 return View(model);
             }
-            var user = await UserManager.FindByNameAsync(model.Email);
+            var user = await UserManager.FindByEmailAsync(model.Email);
             if (user == null) {
                 // Don't reveal that the user does not exist
                 return RedirectToAction("ResetPasswordConfirmation", "Account");
@@ -463,6 +462,15 @@ namespace dnd5tools.Controllers {
                 context.HttpContext.GetOwinContext().Authentication.Challenge(properties, LoginProvider);
             }
         }
+
+        private async Task<string> SendEmailConfirmationTokenAsync(string userID) {
+            string code = await UserManager.GenerateEmailConfirmationTokenAsync(userID);
+            var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = userID, code = code }, protocol: Request.Url.Scheme);
+            await UserManager.SendEmailAsync(userID, "Confirm your account with dnd5tools.com", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+            return callbackUrl;
+        }
+
         #endregion
     }
 }

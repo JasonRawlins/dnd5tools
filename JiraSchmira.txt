@@ -1,13 +1,11 @@
 Queue
 =======================================
-Amazon-type review experience. 
-    "was this helpful" option for each review. 
-    Comment on a review. Comments aren't displayed prominently though.
-    Most helpful reviews at top.
-Users can't say their own review was helpful
+Reviews are sorted by number of votes. 
+Users can't say their own review was helpful.
 
 Backlog
 =======================================
+Check all messages for log in, log out, confirm email, register, etc., to make sure the messages make sense and are polite.
 Make sure the authenticated and anonymous user experiences are correct.
 Style all content. Possibly leverage Bootstrap.
 LESS
