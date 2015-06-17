@@ -57,7 +57,7 @@
     </div>
     <ul class="spell-list">
         <li ng-repeat="spell in vm.spells | filter:vm.spellFilter() | orderBy:vm.predicate">
-            <h3><a ng-bind="spell.name" ng-href="#/spell/{{spell.url}}"></a></h3>
+            <h4><a ng-bind="spell.name" ng-href="#/spell/{{spell.url}}"></a></h4>
             <rating-display rating="{{spell.rating}}"></rating-display>
             / <i ng-bind="spell.levelDescription"></i> <i ng-if="spell.isRitual">(ritual)</i> <i ng-if="spell.isConcentration">(concentration)</i>
             / <span ng-bind="spell.castingTime"></span> 

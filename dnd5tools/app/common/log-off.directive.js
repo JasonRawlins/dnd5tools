@@ -15,7 +15,7 @@
         function link(scope, elem) {
             elem.bind("click", function () {
                 sessionStorage.removeItem("accessToken");
-                document.getElementById("logoutForm").submit();
+                document.getElementById("logout-form").submit();
             });
         }
     }

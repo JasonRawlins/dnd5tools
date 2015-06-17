@@ -3,9 +3,10 @@
 <html lang="en" ng-app="app">
 <head>
     <meta charset="utf-8" />
-    <title>DnD 5 Tools @ViewBag.Title</title>
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DnD 5 Tools @ViewBag.Title</title>
+
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/angular")
@@ -25,14 +26,16 @@
     </script>
 </head>
 <body>
-    <div>
+    <div class="clearfix">
+        <h1 class="inline"><a href="/#/">D&D 5 Tools</a></h1>
         @Html.Partial("_LoginPartial")
     </div>
     <div>
-        <div>
-            <a href="#/characters">Characters</a>
-            <a href="#/spell-list">Spells</a>
-        </div>
+        <nav>
+            <ul class="horizontal">
+                <li><h2><a href="#/spell-list">Spells</a></h2></li>
+            </ul>
+        </nav>
         @RenderBody()
         <div class="clearfix"></div>
         <footer>

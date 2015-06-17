@@ -1,7 +1,7 @@
-﻿<form name="form" class="rating-edit" ng-submit="form.$valid && saveReview()" novalidate>
+﻿<form name="form" class="review-edit" ng-submit="form.$valid && saveReview()" novalidate>
     <div>
         Your rating:
-        <ul class="rating" ng-class="{ 'error': form.$submitted && hoverRating < 1 }">
+        <ul class="rating" ng-class="{ 'error': form.$submitted && review.rating < 1 }">
             <li class="sprite"
                 data-description="Terrible"
                 ng-class="{ 'star-empty': (!hovering && review.rating < 1) || (hovering && hoverRating < 1), 'star-full': (!hovering && review.rating >= 1) || (hovering && hoverRating >= 1) }"></li>
@@ -17,25 +17,37 @@
             <li class="sprite"
                 data-description="Excellent"
                 ng-class="{ 'star-empty': (!hovering && review.rating < 5) || (hovering && hoverRating < 5), 'star-full': (!hovering && review.rating >= 5) || (hovering && hoverRating >= 5) }"></li>
-            <li ng-bind="ratingDescription"></li>
         </ul>
-        <div class="error-message" ng-show="form.$submitted && hoverRating < 1">
+        <span ng-bind="ratingDescription"></span>
+        <div class="error-message" ng-show="form.$submitted && review.rating < 1">
             Please enter a rating.
         </div>
     </div>
     <div>
-        <textarea name="comment" ng-model="review.comment" ng-class="{ 'error': hasError('comment', 'required') }" required></textarea>
+        <textarea name="comment" ng-model="review.comment" ng-class="{ 'error': hasError('comment', 'required') }" required placeholder="Comment for your review"></textarea>
         <div class="error-message" ng-show="hasError('comment', 'required')">
             Please enter a comment.
         </div>
     </div>
     <div>
-        <input type="text" name="headline" ng-model="review.headline" ng-class="{ 'error': hasError('headline', 'required') }" required />
+        <input type="text" name="headline" ng-model="review.headline" ng-class="{ 'error': hasError('headline', 'required') }" required placeholder="Headline for your review" />
         <div class="error-message" ng-show="hasError('headline', 'required')">
             Please enter a headline.
         </div>
     </div>
     <div>
         <input type="submit" value="Save" />
+    </div>
+    <div class="tips">
+        <h4>Review Tips</h4>
+        <ul>
+            <li>What's the best thing about this spell? (If any)</li>
+            <li>What's the worst thing about this spell? (If any)</li>
+            <li>Is this spell good for roleplay situations or is it mainly used in combat?</li>
+            <li>What other spells synergize with this one?</li>
+            <li>What shenanigans have you pulled with this spell?</li>
+            <li>DMs - is this a good spell for NPCs opposing your players?</li>
+            <li>To add a line break, type &lt;br /&gt; (Hey, it's alpha. I'll add something better in future versions)</li>
+        </ul>
     </div>
 </form>

@@ -9,7 +9,8 @@
             replace: true,
             scope: {
                 spell: "=",
-                showRating: "="
+                showRating: "=",
+                reviewing: "="
             },
             templateUrl: "app/spells/spell-header.html"
         };

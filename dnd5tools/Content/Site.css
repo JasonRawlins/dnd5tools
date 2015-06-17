@@ -1,5 +1,10 @@
-﻿body {
+﻿/***********************************************
+* elements
+************************************************/
+body {
+    background: url("/Images/parchment.png") repeat #FFFFFF;
     font-family: "Bookman Old Style" serif;
+    padding: 10px;
 }
 
 h1, h2, h3, h4, h5 {
@@ -10,31 +15,61 @@ h1, h2, h3, h4, h5 {
 }
 
 h1 {
-    font-size: 2.0em;
+    font-size: 3.0em;
 }
 
 h2 {
-    font-size: 1.8em;
+    font-size: 2.5em;
 }
 
 h3 {
-    font-size: 1.6em;
+    font-size: 2.0em;
 }
 
 h4 {
-    font-size: 1.4em;
+    font-size: 1.5em;
 }
 
 h5 {
-    font-size: 1.2em;
+    font-size: 1em;
 }
 
 ul {
     list-style-type: none;
+    margin: 5px 0px;
     padding-left: 0;
-
 }
 
+a {
+    text-decoration: none;
+    color: #4D1501;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/***********************************************
+* miscellaneous
+************************************************/
+.underline {
+    text-decoration: underline;
+}
+
+/***********************************************
+* validation
+************************************************/
+.error {
+    border: 1px solid red;
+}
+
+.error-message {
+    color: red;
+}
+
+/***********************************************
+* layout
+************************************************/
 .clearfix:after {
     content: "";
     display: table;
@@ -48,6 +83,14 @@ ul {
     padding: 5px;
 }
 
+.inline {
+    display: inline-block;
+}
+
+#logout-form {
+    margin-right: 15px;
+}
+
 .pull-left {
     float: left;
 }
@@ -56,45 +99,18 @@ ul {
     float: right;
 }
 
-ul.rating {
-    display: inline-block;
-    margin: 0;
-    cursor: pointer;
-}
-
-.rating li {
-    display: inline-block;
-    height: 16px;
-    width: 16px;
-}
-
-.rating-edit textarea {
-    height: 150px;
-    max-width: 600px;
-    width: 100%;
-}
-
-.rating-edit input[type="text"] {
-    max-width: 600px;
-    width: 100%;
-}
-
-.spell-list li {
-    margin-bottom: 10px;
-}
-
-.spell-list h3 {
+ul.horizontal > li {
     display: inline-block;
 }
 
-.error {
-    border: 1px solid red;
-}
+/***********************************************
+* navigation
+************************************************/
 
-.error-message {
-    color: red;
-}
 
+/***********************************************
+* reviews, ratings, and votes
+************************************************/
 .review {
     width: 100%;
     margin-top: 8px;
@@ -118,8 +134,57 @@ ul.rating {
     width: 93%;
 }
 
+ul.rating {
+    display: inline-block;
+    margin: 0;
+    cursor: pointer;
+}
+
+.rating li {
+    display: inline-block;
+    height: 16px;
+    width: 16px;
+}
+
+.review-edit textarea, .review-edit input, .review-edit .tips {
+    margin-top: 10px;
+}
+
+.review-edit textarea {
+    height: 150px;
+    max-width: 600px;
+    width: 100%;
+}
+
+.review-edit input[type="text"] {
+    max-width: 600px;
+    width: 100%;
+}
+
 .votes > div {
     margin: 0 auto;
     margin-top: 2px;
     text-align: center;
+}
+
+/***********************************************
+* spells
+************************************************/
+
+.spell-list li {
+    margin-bottom: 10px;
+}
+
+.spell-list h4 {
+    display: inline-block;
+}
+
+.spell-details .back, .spell-details .spell-content {
+    float: left;
+}
+
+.spell-details .back {
+    font-size: 40px;
+    margin-top: -5px;
+    width: 40px;
 }

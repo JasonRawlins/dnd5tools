@@ -1,12 +1,12 @@
 ﻿(function () {
     "use strict";
 
-    angular.module("app").directive("ratingEdit", ratingEdit);
+    angular.module("app").directive("reviewEdit", reviewEdit);
 
     /**
     * Manages the interaction of the rating stars when reviewing spells, skills, classes, etc.
     */
-    function ratingEdit() {
+    function reviewEdit() {
         return {
             restrict: "E",
             replace: true,
@@ -14,7 +14,7 @@
                 review: "=",
                 saveReview: "&",
             },
-            templateUrl: "app/reviews/rating-edit.html",
+            templateUrl: "app/reviews/review-edit.html",
             link: link
         };
 
@@ -58,6 +58,7 @@
             ratingUl.bind("mouseleave", function (event) {
                 scope.$apply(function () {
                     scope.hovering = false;
+                    scope.hoverRating = 0;
                     scope.ratingDescription = "";
                 });
             });

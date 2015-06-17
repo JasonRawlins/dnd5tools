@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using System.Data.Entity;
+using HtmlAgilityPack;
 
 namespace dnd5tools.Controllers {
     [Authorize()]
@@ -54,6 +55,9 @@ namespace dnd5tools.Controllers {
             }
 
             var spellReview = db.SpellReviews.Include(sr => sr.Review).SingleOrDefault(sr => sr.SpellID == newSpellReview.SpellID && sr.Review.UserID == newSpellReview.Review.UserID);
+
+            newSpellReview.Review.Comment = HtmlUtility.StripHtmlTags(newSpellReview.Review.Comment, new string[] { "br" });
+            newSpellReview.Review.Headline = HtmlUtility.StripHtmlTags(newSpellReview.Review.Headline, null);
 
             // If the user has already rated this spell, update their rating.
             if (spellReview != null) {

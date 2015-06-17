@@ -10,6 +10,6 @@
         <div>
             by <span ng-bind="review.aspNetUser.userName"></span> on <span ng-bind="review.created | date:'MM/dd/yyyy'"></span>
         </div>
-        <p ng-bind="review.comment"></p>
+        <p ng-bind-html="review.comment | unsafe"></p>
     </div>
 </article>
