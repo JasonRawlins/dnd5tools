@@ -22,6 +22,7 @@ namespace dnd5tools {
                 "~/app/app.controller.js",
                 "~/app/app.routes.js",
                 "~/app/common/api-interceptor.service.js",
+                "~/app/common/expanding-content.directive.js",
                 "~/app/common/log-off.directive.js",
                 "~/app/common/log.service.js",
                 "~/app/common/unsafe-html.filter.js",
@@ -43,8 +44,7 @@ namespace dnd5tools {
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/normalize.css",
-                "~/Content/site.css",
-                "~/Content/sprites.css"
+                "~/Content/site.css"
             ));
         }
     }

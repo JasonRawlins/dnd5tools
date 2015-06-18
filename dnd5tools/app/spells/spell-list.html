@@ -1,9 +1,9 @@
 ﻿<div ng-controller="SpellListController as vm">
-    <div>
+    <expanding-content title="Filter">
         <div>
-            <strong>Class:</strong>  
+            <strong>Class:</strong>
             <input type="checkbox" id="bard" ng-model="vm.search._class.bard" /> <label for="bard">Bard</label>
-            <input type="checkbox" id="cleric" ng-model="vm.search._class.cleric" /> <label for="cleric">Cleric</label> 
+            <input type="checkbox" id="cleric" ng-model="vm.search._class.cleric" /> <label for="cleric">Cleric</label>
             <input type="checkbox" id="druid" ng-model="vm.search._class.druid" /> <label for="druid">Druid</label>
             <input type="checkbox" id="paladin" ng-model="vm.search._class.paladin" /> <label for="paladin">Paladin</label>
             <input type="checkbox" id="ranger" ng-model="vm.search._class.ranger" /> <label for="ranger">Ranger</label>
@@ -21,7 +21,6 @@
             <input type="checkbox" id="illusion" ng-model="vm.search.school.illusion" /> <label for="illusion">Illusion</label>
             <input type="checkbox" id="necromancy" ng-model="vm.search.school.necromancy" /> <label for="necromancy">Necromancy</label>
             <input type="checkbox" id="transmutation" ng-model="vm.search.school.transmutation" /> <label for="transmutation">Transmutation</label>
-
         </div>
         <div>
             <strong>Level:</strong>
@@ -54,7 +53,7 @@
         <div>
             <strong>Search:</strong> <input type="text" ng-model="vm.search.query" />
         </div>
-    </div>
+    </expanding-content>
     <ul class="spell-list">
         <li ng-repeat="spell in vm.spells | filter:vm.spellFilter() | orderBy:vm.predicate">
             <h4><a ng-bind="spell.name" ng-href="#/spell/{{spell.url}}"></a></h4>

@@ -4,6 +4,8 @@
 body {
     background: url("/Images/parchment.png") repeat #FFFFFF;
     font-family: "Bookman Old Style" serif;
+    margin: 0 auto;
+    max-width: 960px;
     padding: 10px;
 }
 
@@ -52,8 +54,55 @@ a:hover {
 /***********************************************
 * miscellaneous
 ************************************************/
+.sprite {
+    background: url('../../Images/spritesheet.png') no-repeat;
+}
+
 .underline {
     text-decoration: underline;
+}
+
+/***********************************************
+* expanding content
+************************************************/
+.expanding-content {
+    border: 1px solid black;
+    box-shadow: 2px 2px gray;
+    padding: 3px;
+}
+
+.expanding-content header > div {
+    display: inline-block;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.plus, .minus {
+    height: 15px;
+    width: 15px;
+}
+
+.minus {
+    background-position: 0px -190px;
+}
+
+.plus {
+    background-position: -16px -190px;
+}
+
+.open, .closed {
+    overflow: hidden;
+    -webkit-transition: height .2s;
+    -moz-transition: height .2s;
+    transition: height .2s;
+}
+
+.open {
+    height: 165px;
+}
+
+.closed {
+    height: 0px;
 }
 
 /***********************************************
@@ -165,6 +214,83 @@ ul.rating {
     margin: 0 auto;
     margin-top: 2px;
     text-align: center;
+}
+
+.rating-1, .rating-1-5, .rating-2, .rating-2-5, .rating-3, .rating-3-5, .rating-4, .rating-4-5, .rating-5 {
+    display: inline-block;
+    height: 16px;
+    width: 80px;
+}
+
+.rating-1 {
+    background-position: 0px 0px;
+}
+
+.rating-1-5 {
+    background-position: 0px -17px;
+}
+
+.rating-2 {
+    background-position: 0px -34px;
+}
+
+.rating-2-5 {
+    background-position: 0px -51px;
+}
+
+.rating-3 {
+    background-position: 0px -68px;
+}
+
+.rating-3-5 {
+    background-position: 0px -85px;
+}
+
+.rating-4 {
+    background-position: 0px -102px;
+}
+
+.rating-4-5 {
+    background-position: 0px -119px;
+}
+
+.rating-5 {
+    background-position: 0px -136px;
+}
+
+.star-empty, .star-full {
+    display: inline-block;
+    height: 16px;
+    width: 16px;
+}
+
+.star-empty {
+    background-position: -90px 0px;
+}
+
+.star-full {
+    background-position: -90px -17px;
+}
+
+.up-vote, .down-vote, .no-up-vote, .no-down-vote {
+    height: 16px;
+    width: 26px;
+}
+
+.up-vote {
+    background-position: -32px -154px;
+}
+
+.down-vote {
+    background-position: -32px -173px;
+}
+
+.no-up-vote {
+    background-position: 0px -154px;
+}
+
+.no-down-vote {
+    background-position: 0px -173px;
 }
 
 /***********************************************

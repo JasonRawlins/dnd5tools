@@ -303,6 +303,8 @@
     <Content Include="app\character\character.data.service.js" />
     <Content Include="app\character\character.html" />
     <Content Include="app\common\api-interceptor.service.js" />
+    <Content Include="app\common\expanding-content.directive.js" />
+    <Content Include="app\common\expanding-content.html" />
     <Content Include="app\common\log-off.directive.js" />
     <Content Include="app\common\unsafe-html.filter.js" />
     <Content Include="app\home.html" />
@@ -326,7 +328,6 @@
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
     <Content Include="Content\normalize.css" />
     <Content Include="Content\site.css" />
-    <Content Include="Content\sprites.css" />
     <Content Include="Database\2015-05-05 1700.sql" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
