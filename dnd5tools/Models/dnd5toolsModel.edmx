@@ -105,6 +105,15 @@
           <Property Name="ClassID" Type="int" Nullable="false" />
           <Property Name="SpellID" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Feedback">
+          <Key>
+            <PropertyRef Name="FeedbackID" />
+          </Key>
+          <Property Name="FeedbackID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Area" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
         <EntityType Name="Race">
           <Key>
             <PropertyRef Name="RaceID" />
@@ -235,6 +244,18 @@ warning 6002: The table/view 'dnd5tools.dbo.SpellWithRating' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Feedback_Feedback">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Feedback" Type="Self.Feedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Feedback">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Review_AspNetUsers">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="Review" Type="Self.Review" Multiplicity="*" />
@@ -312,6 +333,7 @@ warning 6002: The table/view 'dnd5tools.dbo.SpellWithRating' does not have a pri
           <EntitySet Name="Character" EntityType="Self.Character" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Class" EntityType="Self.Class" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ClassSpell" EntityType="Self.ClassSpell" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Feedback" EntityType="Self.Feedback" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Race" EntityType="Self.Race" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Review" EntityType="Self.Review" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ReviewVote" EntityType="Self.ReviewVote" Schema="dbo" store:Type="Tables" />
@@ -347,6 +369,10 @@ warning 6002: The table/view 'dnd5tools.dbo.SpellWithRating' does not have a pri
           <AssociationSet Name="FK_ClassSpell_Spell" Association="Self.FK_ClassSpell_Spell">
             <End Role="Spell" EntitySet="Spell" />
             <End Role="ClassSpell" EntitySet="ClassSpell" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Feedback_Feedback" Association="Self.FK_Feedback_Feedback">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Feedback" EntitySet="Feedback" />
           </AssociationSet>
           <AssociationSet Name="FK_Review_AspNetUsers" Association="Self.FK_Review_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -423,6 +449,11 @@ warning 6002: The table/view 'dnd5tools.dbo.SpellWithRating' does not have a pri
             <End Role="Review" EntitySet="Reviews" />
             <End Role="ReviewVote" EntitySet="ReviewVotes" />
           </AssociationSet>
+          <EntitySet Name="Feedbacks" EntityType="dnd5toolsModel.Feedback" />
+          <AssociationSet Name="FK_Feedback_Feedback" Association="dnd5toolsModel.FK_Feedback_Feedback">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="Feedback" EntitySet="Feedbacks" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="AspNetUser">
           <Key>
@@ -433,6 +464,7 @@ warning 6002: The table/view 'dnd5tools.dbo.SpellWithRating' does not have a pri
           <NavigationProperty Name="Characters" Relationship="dnd5toolsModel.FK_Character_AspNetUsers" FromRole="AspNetUser" ToRole="Character" />
           <NavigationProperty Name="Reviews" Relationship="dnd5toolsModel.FK_Review_AspNetUsers" FromRole="AspNetUser" ToRole="Review" />
           <NavigationProperty Name="ReviewVotes" Relationship="dnd5toolsModel.FK_ReviewVote_AspNetUsers" FromRole="AspNetUser" ToRole="ReviewVote" />
+          <NavigationProperty Name="Feedbacks" Relationship="dnd5toolsModel.FK_Feedback_Feedback" FromRole="AspNetUser" ToRole="Feedback" />
         </EntityType>
         <EntityType Name="Character">
           <Key>
@@ -704,6 +736,28 @@ warning 6002: The table/view 'dnd5tools.dbo.SpellWithRating' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Feedback">
+          <Key>
+            <PropertyRef Name="FeedbackID" />
+          </Key>
+          <Property Name="FeedbackID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Area" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Comment" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="dnd5toolsModel.FK_Feedback_Feedback" FromRole="Feedback" ToRole="AspNetUser" />
+        </EntityType>
+        <Association Name="FK_Feedback_Feedback">
+          <End Type="dnd5toolsModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="dnd5toolsModel.Feedback" Role="Feedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Feedback">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -877,6 +931,16 @@ warning 6002: The table/view 'dnd5tools.dbo.SpellWithRating' does not have a pri
                 <ScalarProperty Name="ReviewID" ColumnName="ReviewID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="ReviewVoteID" ColumnName="ReviewVoteID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Feedbacks">
+            <EntityTypeMapping TypeName="dnd5toolsModel.Feedback">
+              <MappingFragment StoreEntitySet="Feedback">
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="FeedbackID" ColumnName="FeedbackID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

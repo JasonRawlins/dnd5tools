@@ -23,6 +23,8 @@
         <EntityTypeShape EntityType="dnd5toolsModel.ReviewVote" Width="1.5" PointX="5.125" PointY="2.25" />
         <AssociationConnector Association="dnd5toolsModel.FK_ReviewVote_AspNetUsers" />
         <AssociationConnector Association="dnd5toolsModel.FK_ReviewVote_Review" />
+        <EntityTypeShape EntityType="dnd5toolsModel.Feedback" Width="1.5" PointX="8.25" PointY="1" />
+        <AssociationConnector Association="dnd5toolsModel.FK_Feedback_Feedback" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -234,6 +234,7 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AspNetUsersController.cs" />
     <Compile Include="Controllers\CharactersController.cs" />
+    <Compile Include="Controllers\FeedbackController.cs" />
     <Compile Include="Controllers\ReviewVotesController.cs" />
     <Compile Include="Controllers\SpellReviewsController.cs" />
     <Compile Include="Controllers\SpellsController.cs" />
@@ -270,6 +271,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Feedback.cs">
+      <DependentUpon>dnd5toolsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MeViewModels.cs" />
@@ -305,6 +309,9 @@
     <Content Include="app\common\api-interceptor.service.js" />
     <Content Include="app\common\expanding-content.directive.js" />
     <Content Include="app\common\expanding-content.html" />
+    <Content Include="app\common\feedback.data.service.js" />
+    <Content Include="app\common\feedback.directive.js" />
+    <Content Include="app\common\feedback.html" />
     <Content Include="app\common\log-off.directive.js" />
     <Content Include="app\common\unsafe-html.filter.js" />
     <Content Include="app\home.html" />

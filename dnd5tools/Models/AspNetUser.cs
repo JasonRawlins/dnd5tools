@@ -19,6 +19,7 @@ namespace dnd5tools.Models
             this.Characters = new HashSet<Character>();
             this.Reviews = new HashSet<Review>();
             this.ReviewVotes = new HashSet<ReviewVote>();
+            this.Feedbacks = new HashSet<Feedback>();
         }
     
         public string Id { get; set; }
@@ -27,5 +28,6 @@ namespace dnd5tools.Models
         public virtual ICollection<Character> Characters { get; set; }
         public virtual ICollection<Review> Reviews { get; set; }
         public virtual ICollection<ReviewVote> ReviewVotes { get; set; }
+        public virtual ICollection<Feedback> Feedbacks { get; set; }
     }
 }

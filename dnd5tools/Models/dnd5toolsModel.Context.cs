@@ -36,5 +36,6 @@ namespace dnd5tools.Models
         public virtual DbSet<SpellReview> SpellReviews { get; set; }
         public virtual DbSet<SpellWithRating> SpellWithRatings { get; set; }
         public virtual DbSet<ReviewVote> ReviewVotes { get; set; }
+        public virtual DbSet<Feedback> Feedbacks { get; set; }
     }
 }

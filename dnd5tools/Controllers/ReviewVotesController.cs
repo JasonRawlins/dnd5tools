@@ -21,6 +21,9 @@ namespace dnd5tools.Controllers {
             if (string.IsNullOrWhiteSpace(newReviewVote.UserID)) {
                 newReviewVote.UserID = User.Identity.GetUserId();
             }
+            else {
+                return BadRequest();
+            }
 
             var exisitingReviewVote = db.ReviewVotes.Include(rv => rv.Review).SingleOrDefault(rv => rv.ReviewID == newReviewVote.ReviewID && rv.UserID == newReviewVote.UserID);
 

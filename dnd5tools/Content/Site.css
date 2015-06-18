@@ -5,7 +5,7 @@ body {
     background: url("/Images/parchment.png") repeat #FFFFFF;
     font-family: "Bookman Old Style" serif;
     margin: 0 auto;
-    max-width: 960px;
+    max-width: 1000px;
     padding: 10px;
 }
 
@@ -83,11 +83,11 @@ a:hover {
 }
 
 .minus {
-    background-position: 0px -190px;
+    background-position: -16px -190px;
 }
 
 .plus {
-    background-position: -16px -190px;
+    background-position: 0px -190px;
 }
 
 .open, .closed {
@@ -98,7 +98,7 @@ a:hover {
 }
 
 .open {
-    height: 165px;
+    height: 100%;
 }
 
 .closed {
@@ -156,6 +156,18 @@ ul.horizontal > li {
 * navigation
 ************************************************/
 
+/***********************************************
+* feedback
+************************************************/
+.feedback {
+    height: 175px;
+}
+
+.feedback textarea {
+    height: 120px;
+    max-width: 600px;
+    width: 100%;
+}
 
 /***********************************************
 * reviews, ratings, and votes
@@ -313,4 +325,8 @@ ul.rating {
     font-size: 40px;
     margin-top: -5px;
     width: 40px;
+}
+
+.spell-filter {
+    height: 165px;
 }

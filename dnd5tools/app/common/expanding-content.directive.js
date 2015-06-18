@@ -9,12 +9,11 @@
             replace: true,
             transclude: true,
             scope: {
-                title: "@"
+                title: "@",
+                open: "="
             },
             templateUrl: "app/common/expanding-content.html",
             link: function (scope, elem) {
-                scope.open = true;
-
                 elem.find("header").bind("click", function (event) {
                     scope.$apply(function () {
                         scope.open = !scope.open;

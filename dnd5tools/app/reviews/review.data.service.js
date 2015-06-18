@@ -6,7 +6,7 @@
     reviewDataService.$inject = ["$http", "log"];
 
     /**
-    * Manages retrieval and saving of review related operations.
+    * Manages retrieval and saving of review-related data.
     * @param {Object} $http - angular $http service.
     * @param {Object} log - The log service for errors.
     */

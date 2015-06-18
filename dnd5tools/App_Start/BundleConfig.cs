@@ -23,6 +23,8 @@ namespace dnd5tools {
                 "~/app/app.routes.js",
                 "~/app/common/api-interceptor.service.js",
                 "~/app/common/expanding-content.directive.js",
+                "~/app/common/feedback.data.service.js",
+                "~/app/common/feedback.directive.js",
                 "~/app/common/log-off.directive.js",
                 "~/app/common/log.service.js",
                 "~/app/common/unsafe-html.filter.js",

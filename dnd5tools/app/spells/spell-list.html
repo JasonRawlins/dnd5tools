@@ -1,5 +1,5 @@
 ﻿<div ng-controller="SpellListController as vm">
-    <expanding-content title="Filter">
+    <expanding-content title="Filter" open="true">
         <div>
             <strong>Class:</strong>
             <input type="checkbox" id="bard" ng-model="vm.search._class.bard" /> <label for="bard">Bard</label>
@@ -53,6 +53,9 @@
         <div>
             <strong>Search:</strong> <input type="text" ng-model="vm.search.query" />
         </div>
+    </expanding-content>
+    <expanding-content title="Feedback" open="false">
+        <feedback area="spell-list"></feedback>
     </expanding-content>
     <ul class="spell-list">
         <li ng-repeat="spell in vm.spells | filter:vm.spellFilter() | orderBy:vm.predicate">
