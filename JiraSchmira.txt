@@ -1,7 +1,17 @@
 Queue
 =======================================
+Style Spells so that it looks like a tab
+If a logged out user clicks on an vote arrow or the "write a review" button, prompt them to login
+Is there a way to load spells more quickly?
 Style all content. Possibly leverage Bootstrap.
-LESS
+Style comments so there is more whitespace
+Remove ipsum riker content
+Add feedback control to spell pages
+If the user has reveiwed the spell, change "Write a Review" to "Edit Your Review"
+Rating stars need more contrast
+Feedback control, don't display "Please enter a comment" unless they have submitted feedback.
+Users should be able to rate a spell without writing a review.
+If the user is not logged in, replace the "Write a Review" button with a "Log in to review this spell"
 
 Backlog
 =======================================
